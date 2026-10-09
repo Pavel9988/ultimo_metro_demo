@@ -1,0 +1,2619 @@
+{
+  "catalogue_version": "Snapshot fonti pubbliche consultate il 09/10/2026 · ampliamento SF 110 e portaugelli ARAG",
+  "note": "Catalogo locale ampliato da schede pubbliche Nordson/ARAG e ASJ. I codici e i dati di prodotto sono riferimenti di catalogo; non provano che i componenti siano compatibili fra loro o già installati. Per gli ugelli AFC 110 è inclusa la curva pubblicata di portata e gocce; per le altre taglie/famiglie, quando indicato, la portata è una stima basata sul valore nominale a 3 bar e sulla legge approssimata di radice della pressione. Verificare sempre scheda tecnica corrente, pressione, formulato e calibrazione in campo. La famiglia SF 110 è stata aggiunta con portate e granulometria tabellari dal catalogo tecnico ASJ; il catalogo hardware include ulteriori portaugelli singoli/girevoli e corpi 413 ARAG con codici e caratteristiche dichiarate dalle schede ufficiali. La presenza nel menu non prova compatibilità tra i componenti.",
+  "products": [
+    {
+      "category": "controller",
+      "code": "4675204",
+      "name": "Delta 70T IBX",
+      "short": "Terminale ISOBUS per centraline ARAG IBX",
+      "specs": "GPS/NAV, UT e Task Controller (TC-SC, TC-GEO, TC-BAS); connessione Only ARAG IBX.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": true,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675202",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS GPS + UT + Task Controller",
+      "specs": "GPS/NAV, UT e Task Controller TC-SC/TC-GEO/TC-BAS; variante ISOBUS non IBX-only.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4674L0701",
+      "name": "Bravo 400S LT",
+      "short": "Computer irroratrice · 7 sezioni",
+      "specs": "Rate controller con navigatore integrato; 7 sezioni, senza funzioni idrauliche nella variante 0701.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115653",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": 7
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4674L0713",
+      "name": "Bravo 400S LT",
+      "short": "Computer irroratrice · 7 sezioni + 7 funzioni idrauliche",
+      "specs": "Rate controller con navigatore integrato; 7 sezioni e 7 funzioni idrauliche.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115653",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": 7
+      }
+    },
+    {
+      "category": "rate_control",
+      "code": "4679013",
+      "name": "IBX100 ISOBUS Flowtron",
+      "short": "Controllo PWM e gestione dell'irroratrice",
+      "specs": "Centralina Flowtron ISOBUS; la scheda ufficiale cita chiusura ugello per ugello, rateo variabile e raccolta dei dati di lavoro.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=141907",
+      "capabilities": {
+        "pwm": true,
+        "variable_rate": true,
+        "nozzle_by_nozzle": true
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462031",
+      "name": "Orion 3",
+      "short": "Flussimetro elettromagnetico · 1–40 L/min",
+      "specs": "Campo di portata dichiarato 1–40 L/min; la famiglia è presentata per distribuzione di fertilizzante liquido/seminatrici. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 1,
+        "range_max_l_min": 40
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462032",
+      "name": "Orion 3",
+      "short": "Flussimetro elettromagnetico · 2–80 L/min",
+      "specs": "Campo di portata dichiarato 2–80 L/min; dato di misura, NON portata disponibile dell'intero impianto irrorante. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 2,
+        "range_max_l_min": 80
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462034",
+      "name": "Orion 3 high-flow",
+      "short": "Flussimetro elettromagnetico · 5,5–220 L/min",
+      "specs": "Campo di portata dichiarato 5,5–220 L/min; la compatibilità applicativa va verificata per l'impianto specifico. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 5.5,
+        "range_max_l_min": 220
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T04A55",
+      "name": "Valvola a sfera elettrica 853",
+      "short": "2 vie · raccordo filettato G 1 1/4\"",
+      "specs": "Portata nominale dichiarata 290 L/min a Δp 0,5 bar; 12 bar max; alimentazione 12 Vdc. La portata della valvola non equivale alla capacità di irrorazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126532",
+      "capabilities": {
+        "nominal_flow_l_min": 290,
+        "max_pressure_bar": 12,
+        "ways": 2
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T95A0",
+      "name": "SELETRON · portaugello quadruplo",
+      "short": "Gruppo con valvola SELETRON · 12 V",
+      "specs": "Portaugello quadruplo con doppia valvola SELETRON; controllo CAN-Bus della valvola e stato. Pressione max dichiarata 8 bar nella famiglia mostrata.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=97807",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "pump",
+      "code": "97055201",
+      "name": "Pompa MSP400",
+      "short": "Pompa a più giranti · comando elettromagnetico",
+      "specs": "Scheda prodotto: 567 L/min e 11 bar max nelle condizioni dichiarate. Valore nominale della pompa, non portata garantita agli ugelli installati.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=122028",
+      "capabilities": {
+        "nominal_flow_l_min": 567,
+        "max_pressure_bar": 11
+      }
+    },
+    {
+      "category": "filter",
+      "code": "42433135",
+      "name": "Filtro cilindrico per portaugello",
+      "short": "80 mesh",
+      "specs": "Accessorio filtrante; scegliere la maglia compatibile con ugello, formulato e prescrizioni del costruttore.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100357",
+      "capabilities": {
+        "mesh": 80
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "002750B",
+      "name": "Portaugello a farfalla con ugello ceramico",
+      "short": "Gruppo ugello / portaugello ARAG",
+      "specs": "Codice articolo pubblicato dal catalogo ARAG; la portata dipende dalla specifica punta montata e dalla pressione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=101089",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "filter",
+      "code": "4243313",
+      "name": "Filtro cilindrico per portaugello",
+      "short": "50 mesh",
+      "specs": "Accessorio filtrante da 50 mesh; verificare compatibilità con ugello e prodotto.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100357",
+      "capabilities": {
+        "mesh": 50
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675200",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS · GPS/NAV",
+      "specs": "Terminale virtuale ISOBUS con GPS/NAV; le funzioni Task Controller non sono incluse in questa variante.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675203",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS · UT",
+      "specs": "Variante Universal Terminal (UT); le funzioni di Task Controller non sono incluse in questa variante.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675304",
+      "name": "Delta 80T IBX",
+      "short": "Terminale GPS/NAV + UT + Task Controller · IBX",
+      "specs": "Terminale progettato per macchine con unità di controllo ARAG IBX; confermare hardware e software della specifica installazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": true,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "46731501",
+      "name": "Bravo 300S 5 sezioni",
+      "short": "Computer irroratrice a 5 sezioni (rateo automatico da flusso e pressione)",
+      "specs": "Dosaggio automatico con valutazione di portata e pressione, 2/4/5/7 sezioni, valvole a 2 o 3 vie per sezione, ingresso flussimetro, fino a 19 configurazioni irroratrice, scheda SD. La scheda del distributore non indica ISOBUS né Task Controller: non assumerli.",
+      "official_url": "https://kramp.com/shop-us/en/p/bravo-300s-5-tb-spray-computer--46731501",
+      "capabilities": {
+        "task_controller": false,
+        "sections": 5
+      }
+    },
+    {
+      "category": "ecu",
+      "code": "4679900",
+      "name": "IBX50 Sprayer",
+      "short": "Centralina di controllo per irroratrice",
+      "specs": "Centralina pensata per l'integrazione con monitor Delta 70T IBX / Delta 80T IBX. Non equivale automaticamente alla centralina Flowtron IBX100.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142857",
+      "capabilities": {
+        "ibx_only": true,
+        "pwm": false
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211P40000",
+      "name": "ORION 2+",
+      "short": "Flussimetro elettromagnetico · 2–200 L/min",
+      "specs": "Scheda ARAG: range 2–200 L/min, pressione massima 40 bar e caduta di pressione 0,4 bar. ARAG cita ORION 2+ anche in gruppi di comando per atomizzatori. Il range di misura non è la portata realmente disponibile agli ugelli.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142638",
+      "capabilities": {
+        "range_min_l_min": 2,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 40,
+        "application": "sprayer-compatible-family-to-confirm"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11001",
+      "name": "ASJ AFC 110° · taglia 01",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.28,
+          "2": 0.33,
+          "3": 0.4,
+          "4": 0.46,
+          "5": 0.52,
+          "6": 0.57,
+          "7": 0.61,
+          "8": 0.65
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "XC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "M",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 5,
+          "2": 7,
+          "3": 12,
+          "4": 15,
+          "5": 19,
+          "6": 21,
+          "7": 24,
+          "8": 28
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 70,
+          "2": 84,
+          "3": 95,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC110015",
+      "name": "ASJ AFC 110° · taglia 015",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.42,
+          "2": 0.49,
+          "3": 0.6,
+          "4": 0.69,
+          "5": 0.77,
+          "6": 0.85,
+          "7": 0.92,
+          "8": 0.98
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "XC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "C",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 6,
+          "2": 7,
+          "3": 11,
+          "4": 14,
+          "5": 17,
+          "6": 19,
+          "7": 22,
+          "8": 24
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 74,
+          "2": 83,
+          "3": 92,
+          "4": 97,
+          "5": 99,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11002",
+      "name": "ASJ AFC 110° · taglia 02",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.8,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.57,
+          "2": 0.65,
+          "3": 0.8,
+          "4": 0.92,
+          "5": 1.03,
+          "6": 1.13,
+          "7": 1.22,
+          "8": 1.31
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "VC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "C",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 7,
+          "2": 10,
+          "3": 14,
+          "4": 16,
+          "5": 19,
+          "6": 21,
+          "7": 23,
+          "8": 25
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 83,
+          "2": 88,
+          "3": 94,
+          "4": 97,
+          "5": 99,
+          "6": 99,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC110025",
+      "name": "ASJ AFC 110° · taglia 025",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.71,
+          "2": 0.82,
+          "3": 1.0,
+          "4": 1.15,
+          "5": 1.29,
+          "6": 1.41,
+          "7": 1.53,
+          "8": 1.63
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "C",
+          "2": "C",
+          "3": "M",
+          "4": "M",
+          "5": "M",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 12,
+          "2": 15,
+          "3": 21,
+          "4": 25,
+          "5": 28,
+          "6": 31,
+          "7": 32,
+          "8": 34
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 93,
+          "2": 97,
+          "3": 99,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11003",
+      "name": "ASJ AFC 110° · taglia 03",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.85,
+          "2": 0.98,
+          "3": 1.2,
+          "4": 1.39,
+          "5": 1.55,
+          "6": 1.7,
+          "7": 1.83,
+          "8": 1.96
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "VC",
+          "2": "C",
+          "3": "C",
+          "4": "M",
+          "5": "M",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 10,
+          "2": 13,
+          "3": 17,
+          "4": 20,
+          "5": 22,
+          "6": 23,
+          "7": 25,
+          "8": 26
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 89,
+          "2": 93,
+          "3": 97,
+          "4": 99,
+          "5": 99,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11004",
+      "name": "ASJ AFC 110° · taglia 04",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.13,
+          "2": 1.31,
+          "3": 1.6,
+          "4": 1.85,
+          "5": 2.07,
+          "6": 2.26,
+          "7": 2.44,
+          "8": 2.61
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "XC",
+          "2": "VC",
+          "3": "VC",
+          "4": "C",
+          "5": "C",
+          "6": "C",
+          "7": "C",
+          "8": "C"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 6,
+          "2": 8,
+          "3": 11,
+          "4": 13,
+          "5": 16,
+          "6": 17,
+          "7": 18,
+          "8": 19
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 74,
+          "2": 81,
+          "3": 88,
+          "4": 91,
+          "5": 93,
+          "6": 95,
+          "7": 95,
+          "8": 96
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11005",
+      "name": "ASJ AFC 110° · taglia 05",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.41,
+          "2": 1.63,
+          "3": 2.0,
+          "4": 2.31,
+          "5": 2.58,
+          "6": 2.83,
+          "7": 3.06,
+          "8": 3.27
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "VC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "C",
+          "6": "C",
+          "7": "C",
+          "8": "C"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 8,
+          "2": 9,
+          "3": 12,
+          "4": 14,
+          "5": 15,
+          "6": 16,
+          "7": 17,
+          "8": 18
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 79,
+          "2": 85,
+          "3": 89,
+          "4": 92,
+          "5": 93,
+          "6": 94,
+          "7": 95,
+          "8": 96
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11006",
+      "name": "ASJ AFC 110° · taglia 06",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.7,
+          "2": 1.96,
+          "3": 2.4,
+          "4": 2.77,
+          "5": 3.1,
+          "6": 3.39,
+          "7": 3.67,
+          "8": 3.92
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "XC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "C",
+          "6": "C",
+          "7": "C",
+          "8": "C"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 7,
+          "2": 9,
+          "3": 12,
+          "4": 13,
+          "5": 15,
+          "6": 17,
+          "7": 17,
+          "8": 18
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 78,
+          "2": 83,
+          "3": 89,
+          "4": 92,
+          "5": 93,
+          "6": 94,
+          "7": 95,
+          "8": 96
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11008",
+      "name": "ASJ AFC 110° · taglia 08",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 3.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 2.26,
+          "2": 2.61,
+          "3": 3.2,
+          "4": 3.7,
+          "5": 4.13,
+          "6": 4.53,
+          "7": 4.89,
+          "8": 5.23
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "XC",
+          "2": "VC",
+          "3": "C",
+          "4": "C",
+          "5": "C",
+          "6": "C",
+          "7": "C",
+          "8": "C"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 7,
+          "2": 9,
+          "3": 12,
+          "4": 14,
+          "5": 15,
+          "6": 16,
+          "7": 17,
+          "8": 18
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 78,
+          "2": 83,
+          "3": 89,
+          "4": 92,
+          "5": 93,
+          "6": 94,
+          "7": 95,
+          "8": 96
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC110015",
+      "name": "ASJ WRC 110° · taglia 015",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11002",
+      "name": "ASJ WRC 110° · taglia 02",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.8,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC110025",
+      "name": "ASJ WRC 110° · taglia 025",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11003",
+      "name": "ASJ WRC 110° · taglia 03",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11004",
+      "name": "ASJ WRC 110° · taglia 04",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11005",
+      "name": "ASJ WRC 110° · taglia 05",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11006",
+      "name": "ASJ WRC 110° · taglia 06",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11008",
+      "name": "ASJ WRC 110° · taglia 08",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 3.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8001",
+      "name": "ASJ AFC 80° · taglia 01",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 0.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC80015",
+      "name": "ASJ AFC 80° · taglia 015",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 0.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8002",
+      "name": "ASJ AFC 80° · taglia 02",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 0.8,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC80025",
+      "name": "ASJ AFC 80° · taglia 025",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8003",
+      "name": "ASJ AFC 80° · taglia 03",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC80035",
+      "name": "ASJ AFC 80° · taglia 035",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8004",
+      "name": "ASJ AFC 80° · taglia 04",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8005",
+      "name": "ASJ AFC 80° · taglia 05",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 2.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC8006",
+      "name": "ASJ AFC 80° · taglia 06",
+      "short": "Ventaglio ceramico antideriva · induzione d’aria",
+      "specs": "Ugello antideriva a induzione d’aria; il produttore dichiara riduzione della deriva fino al 90% rispetto agli ugelli convenzionali, in condizioni specifiche. Dati di portata dalla tabella tecnica ASJ; classe/gocce riportate solo quando la tabella del modello esatto è caricata.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": true,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 2.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC80015",
+      "name": "ASJ WRC 80° · taglia 015",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 0.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8002",
+      "name": "ASJ WRC 80° · taglia 02",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 0.8,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC80025",
+      "name": "ASJ WRC 80° · taglia 025",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8003",
+      "name": "ASJ WRC 80° · taglia 03",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8004",
+      "name": "ASJ WRC 80° · taglia 04",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 1.6,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8005",
+      "name": "ASJ WRC 80° · taglia 05",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 2.0,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8006",
+      "name": "ASJ WRC 80° · taglia 06",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 2.4,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC8008",
+      "name": "ASJ WRC 80° · taglia 08",
+      "short": "Ventaglio standard · ceramica",
+      "specs": "Ugello a ventaglio standard in ceramica, angolo nominale 80°/110°. ASJ descrive copertura stabile e riduzione deriva a basse pressioni (1–1,5 bar); verificare pressione e bersaglio.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 80,
+        "flow_l_min_at_3_bar": 3.2,
+        "flow_model": "square_root_pressure_reference_3bar",
+        "pressure_min_bar": 1.0,
+        "pressure_max_bar": 7.0,
+        "droplet_dataset_available": false,
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211P10000",
+      "name": "ORION 2+",
+      "short": "0,2–20 L/min",
+      "specs": "Campo di misura dichiarato 0,2–20 L/min; pressione massima di questa variante 40 bar; 3000 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142638",
+      "capabilities": {
+        "range_min_l_min": 0.2,
+        "range_max_l_min": 20,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 3000
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221P70000",
+      "name": "ORION 2+",
+      "short": "8–800 L/min",
+      "specs": "Campo di misura dichiarato 8–800 L/min; pressione massima di questa variante 20 bar; 75 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142638",
+      "capabilities": {
+        "range_min_l_min": 8,
+        "range_max_l_min": 800,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 75
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211AG0000",
+      "name": "ORION 2",
+      "short": "0,3–6 L/min",
+      "specs": "Campo di misura dichiarato 0,3–6 L/min; pressione massima di questa variante 40 bar; 6000 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 0.3,
+        "range_max_l_min": 6,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 6000
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A00000",
+      "name": "ORION 2",
+      "short": "0,5–10 L/min",
+      "specs": "Campo di misura dichiarato 0,5–10 L/min; pressione massima di questa variante 40 bar; 6000 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 0.5,
+        "range_max_l_min": 10,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 6000
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A10000",
+      "name": "ORION 2",
+      "short": "1–20 L/min",
+      "specs": "Campo di misura dichiarato 1–20 L/min; pressione massima di questa variante 40 bar; 3000 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 1,
+        "range_max_l_min": 20,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 3000
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A20000",
+      "name": "ORION 2",
+      "short": "2,5–50 L/min",
+      "specs": "Campo di misura dichiarato 2,5–50 L/min; pressione massima di questa variante 40 bar; 1200 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 2.5,
+        "range_max_l_min": 50,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 1200
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A30000",
+      "name": "ORION 2",
+      "short": "5–100 L/min",
+      "specs": "Campo di misura dichiarato 5–100 L/min; pressione massima di questa variante 40 bar; 600 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 5,
+        "range_max_l_min": 100,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 600
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211AF0000",
+      "name": "ORION 2",
+      "short": "7,5–150 L/min",
+      "specs": "Campo di misura dichiarato 7,5–150 L/min; pressione massima di questa variante 40 bar; 450 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 7.5,
+        "range_max_l_min": 150,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 450
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A40000",
+      "name": "ORION 2",
+      "short": "10–200 L/min",
+      "specs": "Campo di misura dichiarato 10–200 L/min; pressione massima di questa variante 40 bar; 300 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 10,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 40,
+        "pulses_per_liter": 300
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A40000",
+      "name": "ORION 2",
+      "short": "10–200 L/min · variante 20 bar",
+      "specs": "Campo di misura dichiarato 10–200 L/min · variante 20 bar; pressione massima di questa variante 20 bar; 300 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 10,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 300
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A50000",
+      "name": "ORION 2",
+      "short": "20–400 L/min",
+      "specs": "Campo di misura dichiarato 20–400 L/min; pressione massima di questa variante 20 bar; 150 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 20,
+        "range_max_l_min": 400,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 150
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A60000",
+      "name": "ORION 2",
+      "short": "30–600 L/min",
+      "specs": "Campo di misura dichiarato 30–600 L/min; pressione massima di questa variante 20 bar; 100 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 30,
+        "range_max_l_min": 600,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 100
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A70000",
+      "name": "ORION 2",
+      "short": "40–800 L/min",
+      "specs": "Campo di misura dichiarato 40–800 L/min; pressione massima di questa variante 20 bar; 75 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 40,
+        "range_max_l_min": 800,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 75
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A11313",
+      "name": "ORION 2",
+      "short": "1–20 L/min · attacco filettato G 3/4",
+      "specs": "Campo di misura dichiarato 1–20 L/min · attacco filettato G 3/4; pressione massima di questa variante 20 bar; 3000 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 1,
+        "range_max_l_min": 20,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 3000
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A21313",
+      "name": "ORION 2",
+      "short": "2,5–50 L/min · attacco filettato G 3/4",
+      "specs": "Campo di misura dichiarato 2,5–50 L/min · attacco filettato G 3/4; pressione massima di questa variante 20 bar; 1200 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 2.5,
+        "range_max_l_min": 50,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 1200
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A31414",
+      "name": "ORION 2",
+      "short": "5–100 L/min · attacco filettato G 1",
+      "specs": "Campo di misura dichiarato 5–100 L/min · attacco filettato G 1; pressione massima di questa variante 20 bar; 600 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 5,
+        "range_max_l_min": 100,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 600
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A41414",
+      "name": "ORION 2",
+      "short": "10–200 L/min · attacco filettato G 1",
+      "specs": "Campo di misura dichiarato 10–200 L/min · attacco filettato G 1; pressione massima di questa variante 20 bar; 300 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 10,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 300
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211A41515",
+      "name": "ORION 2",
+      "short": "10–200 L/min · attacco filettato G 1 1/4",
+      "specs": "Campo di misura dichiarato 10–200 L/min · attacco filettato G 1 1/4; pressione massima di questa variante 20 bar; 300 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 10,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 300
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A51515",
+      "name": "ORION 2",
+      "short": "20–400 L/min · attacco filettato G 1 1/4",
+      "specs": "Campo di misura dichiarato 20–400 L/min · attacco filettato G 1 1/4; pressione massima di questa variante 20 bar; 150 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 20,
+        "range_max_l_min": 400,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 150
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A51616",
+      "name": "ORION 2",
+      "short": "20–400 L/min · attacco filettato G 1 1/2",
+      "specs": "Campo di misura dichiarato 20–400 L/min · attacco filettato G 1 1/2; pressione massima di questa variante 20 bar; 150 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 20,
+        "range_max_l_min": 400,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 150
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A61616",
+      "name": "ORION 2",
+      "short": "30–600 L/min · attacco filettato G 1 1/2",
+      "specs": "Campo di misura dichiarato 30–600 L/min · attacco filettato G 1 1/2; pressione massima di questa variante 20 bar; 100 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 30,
+        "range_max_l_min": 600,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 100
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A61717",
+      "name": "ORION 2",
+      "short": "30–600 L/min · attacco filettato G 2",
+      "specs": "Campo di misura dichiarato 30–600 L/min · attacco filettato G 2; pressione massima di questa variante 20 bar; 100 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 30,
+        "range_max_l_min": 600,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 100
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46221A71717",
+      "name": "ORION 2",
+      "short": "40–800 L/min · attacco filettato G 2",
+      "specs": "Campo di misura dichiarato 40–800 L/min · attacco filettato G 2; pressione massima di questa variante 20 bar; 75 impulsi/L. Il range di misura del sensore non è la portata utile agli ugelli. Verificare attacchi e applicazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115072",
+      "capabilities": {
+        "range_min_l_min": 40,
+        "range_max_l_min": 800,
+        "max_pressure_bar": 20,
+        "pulses_per_liter": 75
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T1400",
+      "name": "SELETRON · portaugello doppio",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello doppio SELETRON per comando separato degli ugelli; CAN-Bus nella famiglia; pressione max 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=141943",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "ways": 2,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T1402",
+      "name": "SELETRON · portaugello doppio",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello doppio SELETRON con comando selettivo; pressione max dichiarata 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=141943",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "ways": 2,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T940",
+      "name": "SELETRON · portaugello quadruplo",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello quadruplo SELETRON; pressione max 8 bar e alimentazione 12 Vdc nella variante pubblicata.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=97808",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "ways": 4,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T950",
+      "name": "SELETRON · portaugello quadruplo 3/4",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello quadruplo SELETRON; pressione max 8 bar; 12 Vdc.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=97808",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "ways": 4,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T95A2",
+      "name": "SELETRON · portaugello quadruplo PTFE",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello quadruplo SELETRON con componentistica PTFE nella variante pubblicata; pressione max 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=97808",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "ways": 4,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4064W25A1V",
+      "name": "FLOWTRON FCV · portaugello triplo 25 mm",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello Compact-Jet a tre vie con valvola FLOWTRON FCV per modulazione PWM; pressione max 8 bar. Verificare la specifica installazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "pwm_valve": true,
+        "ways": 3,
+        "max_pressure_bar": 8,
+        "variable_rate_actuation": true
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4064W261V",
+      "name": "FLOWTRON FCV · portaugello triplo 1″",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello Compact-Jet a tre vie con valvola FLOWTRON FCV per modulazione PWM; pressione max 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "pwm_valve": true,
+        "ways": 3,
+        "max_pressure_bar": 8,
+        "variable_rate_actuation": true
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4064W241V",
+      "name": "FLOWTRON FCV · portaugello triplo 1/2″",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello Compact-Jet a tre vie con valvola FLOWTRON FCV per modulazione PWM; pressione max 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "pwm_valve": true,
+        "ways": 3,
+        "max_pressure_bar": 8,
+        "variable_rate_actuation": true
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4065T840",
+      "name": "SELETRON EASYFIT · portaugello",
+      "short": "Componente di erogazione selettiva / PWM",
+      "specs": "Portaugello SELETRON con attacco rapido EASYFIT, portata di riferimento 4 L/min a Δp 0,5 bar nella scheda; pressione max 8 bar.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110508",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "max_pressure_bar": 8,
+        "nominal_flow_l_min": 4
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T04A44",
+      "name": "Valvola elettrica 853 · 1″",
+      "short": "Valvola a sfera elettrica",
+      "specs": "2 vie · G 1″ F BSP · 230 L/min a Δp 0,5 bar · 12 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126533",
+      "capabilities": {
+        "nominal_flow_l_min": 230,
+        "max_pressure_bar": 12,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T05A66",
+      "name": "Valvola elettrica 853 · 1 1/2″",
+      "short": "Valvola a sfera elettrica",
+      "specs": "2 vie · G 1 1/2″ F BSP · 570 L/min a Δp 0,5 bar · 10 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126533",
+      "capabilities": {
+        "nominal_flow_l_min": 570,
+        "max_pressure_bar": 10,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T06A77",
+      "name": "Valvola elettrica 853 · 2″",
+      "short": "Valvola a sfera elettrica",
+      "specs": "2 vie · G 2″ F BSP · 680 L/min a Δp 0,5 bar · 8 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126533",
+      "capabilities": {
+        "nominal_flow_l_min": 680,
+        "max_pressure_bar": 8,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T07A88",
+      "name": "Valvola elettrica 853 · 2 1/2″",
+      "short": "Valvola a sfera elettrica",
+      "specs": "2 vie · G 2 1/2″ F BSP · 1150 L/min a Δp 0,5 bar · 6 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126533",
+      "capabilities": {
+        "nominal_flow_l_min": 1150,
+        "max_pressure_bar": 6,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853BR04S66E",
+      "name": "Valvola elettrica 853 CAN-Bus · DN32",
+      "short": "Valvola a sfera elettrica",
+      "specs": "290 L/min · DN32 · SAE J1939 · 12 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "nominal_flow_l_min": 290,
+        "max_pressure_bar": 12,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853BR06S77E",
+      "name": "Valvola elettrica 853 CAN-Bus · DN50",
+      "short": "Valvola a sfera elettrica",
+      "specs": "680 L/min · DN50 · SAE J1939 · 8 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "nominal_flow_l_min": 680,
+        "max_pressure_bar": 8,
+        "ways": 2
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853BR07S99E",
+      "name": "Valvola elettrica 853 CAN-Bus · DN65",
+      "short": "Valvola a sfera elettrica",
+      "specs": "1150 L/min · DN65 · SAE J1939 · 6 bar max · 12 Vdc",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "nominal_flow_l_min": 1150,
+        "max_pressure_bar": 6,
+        "ways": 2
+      }
+    },
+    {
+      "category": "filter",
+      "code": "4243314",
+      "name": "Filtro portaugello · 100 mesh",
+      "short": "100 mesh",
+      "specs": "Accessorio filtrante ARAG da 100 mesh; verificare maglia compatibile con punta, formulato e raccomandazioni costruttore.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100357",
+      "capabilities": {
+        "mesh": 100
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413013",
+      "name": "Morsetto per barra a secco · 19 mm",
+      "short": "Morsetto di montaggio per tubo quadrato da 19 mm (3/4″).",
+      "specs": "Morsetto di montaggio per tubo quadrato da 19 mm (3/4″).",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100293",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413014",
+      "name": "Morsetto per barra a secco · 25 mm",
+      "short": "Morsetto di montaggio per tubo quadrato da 25 mm (1″).",
+      "specs": "Morsetto di montaggio per tubo quadrato da 25 mm (1″).",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100293",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413015",
+      "name": "Morsetto per barra a secco · 31,8 mm",
+      "short": "Morsetto di montaggio per tubo quadrato da 31,8 mm (1 1/4″).",
+      "specs": "Morsetto di montaggio per tubo quadrato da 31,8 mm (1 1/4″).",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100293",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413016",
+      "name": "Morsetto per barra a secco · 38 mm",
+      "short": "Morsetto di montaggio per tubo quadrato da 38 mm (1 1/2″).",
+      "specs": "Morsetto di montaggio per tubo quadrato da 38 mm (1 1/2″).",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100293",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11001",
+      "name": "ASJ SF 110° · taglia 01",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.4,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.28,
+          "2": 0.33,
+          "3": 0.4,
+          "4": 0.46,
+          "5": 0.52,
+          "6": 0.57,
+          "7": 0.61,
+          "8": 0.65
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "F",
+          "2": "F",
+          "3": "F",
+          "4": "F",
+          "5": "VF",
+          "6": "VF",
+          "7": "VF",
+          "8": "VF"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 64,
+          "2": 70,
+          "3": 77,
+          "4": 81,
+          "5": 85,
+          "6": 86,
+          "7": 87,
+          "8": 87
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF110015",
+      "name": "ASJ SF 110° · taglia 015",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.6,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.42,
+          "2": 0.49,
+          "3": 0.6,
+          "4": 0.69,
+          "5": 0.77,
+          "6": 0.85,
+          "7": 0.92,
+          "8": 0.98
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "F",
+          "2": "F",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "VF",
+          "7": "VF",
+          "8": "VF"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 57,
+          "2": 64,
+          "3": 71,
+          "4": 76,
+          "5": 79,
+          "6": 82,
+          "7": 82,
+          "8": 83
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11002",
+      "name": "ASJ SF 110° · taglia 02",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 0.8,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.57,
+          "2": 0.65,
+          "3": 0.8,
+          "4": 0.92,
+          "5": 1.03,
+          "6": 1.13,
+          "7": 1.22,
+          "8": 1.31
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "F",
+          "2": "F",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 48,
+          "2": 54,
+          "3": 60,
+          "4": 63,
+          "5": 63,
+          "6": 64,
+          "7": 65,
+          "8": 65
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF110025",
+      "name": "ASJ SF 110° · taglia 025",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.0,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.71,
+          "2": 0.82,
+          "3": 1.0,
+          "4": 1.15,
+          "5": 1.29,
+          "6": 1.41,
+          "7": 1.53,
+          "8": 1.63
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "F",
+          "2": "F",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 50,
+          "2": 56,
+          "3": 63,
+          "4": 66,
+          "5": 66,
+          "6": 67,
+          "7": 68,
+          "8": 67
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11003",
+      "name": "ASJ SF 110° · taglia 03",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.2,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 0.85,
+          "2": 0.98,
+          "3": 1.2,
+          "4": 1.39,
+          "5": 1.55,
+          "6": 1.7,
+          "7": 1.83,
+          "8": 1.96
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "F",
+          "2": "F",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 40,
+          "2": 46,
+          "3": 53,
+          "4": 55,
+          "5": 56,
+          "6": 57,
+          "7": 57,
+          "8": 58
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11004",
+      "name": "ASJ SF 110° · taglia 04",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 1.6,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.13,
+          "2": 1.31,
+          "3": 1.6,
+          "4": 1.85,
+          "5": 2.07,
+          "6": 2.26,
+          "7": 2.44,
+          "8": 2.61
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "M",
+          "2": "M",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 35,
+          "2": 39,
+          "3": 42,
+          "4": 44,
+          "5": 47,
+          "6": 47,
+          "7": 47,
+          "8": 49
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11005",
+      "name": "ASJ SF 110° · taglia 05",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.0,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.41,
+          "2": 1.63,
+          "3": 2.0,
+          "4": 2.31,
+          "5": 2.58,
+          "6": 2.83,
+          "7": 3.06,
+          "8": 3.27
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "M",
+          "2": "M",
+          "3": "F",
+          "4": "F",
+          "5": "F",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 34,
+          "2": 38,
+          "3": 44,
+          "4": 46,
+          "5": 48,
+          "6": 50,
+          "7": 50,
+          "8": 49
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11006",
+      "name": "ASJ SF 110° · taglia 06",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 2.4,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 1.7,
+          "2": 1.96,
+          "3": 2.4,
+          "4": 2.77,
+          "5": 3.1,
+          "6": 3.39,
+          "7": 3.67,
+          "8": 3.92
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "M",
+          "2": "M",
+          "3": "M",
+          "4": "M",
+          "5": "M",
+          "6": "F",
+          "7": "F",
+          "8": "F"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 31,
+          "2": 33,
+          "3": 38,
+          "4": 40,
+          "5": 41,
+          "6": 43,
+          "7": 43,
+          "8": 44
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 100,
+          "2": 100,
+          "3": 100,
+          "4": 100,
+          "5": 100,
+          "6": 100,
+          "7": 100,
+          "8": 100
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "SF11008",
+      "name": "ASJ SF 110° · taglia 08",
+      "short": "Ugello tradizionale a ventaglio piatto · angolo nominale 110°",
+      "specs": "Curva portata/pressione e indicatori granulometrici riportati nella tabella tecnica ASJ. La famiglia SF è tradizionale, non va etichettata antideriva solo dalla curva. Verificare scheda attuale, formulato e calibrazione.",
+      "official_url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data_url": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf",
+      "capabilities": {
+        "low_drift": false,
+        "application": "boom",
+        "spray_angle_deg": 110,
+        "flow_l_min_at_3_bar": 3.2,
+        "flow_model": "published_table_sf110",
+        "pressure_min_bar": 1.5,
+        "pressure_max_bar": 8.0,
+        "droplet_dataset_available": true,
+        "flow_l_min_by_pressure_bar": {
+          "1.5": 2.26,
+          "2": 2.61,
+          "3": 3.2,
+          "4": 3.7,
+          "5": 4.13,
+          "6": 4.53,
+          "7": 4.89,
+          "8": 5.23
+        },
+        "drop_class_by_pressure_bar": {
+          "1.5": "M",
+          "2": "M",
+          "3": "M",
+          "4": "M",
+          "5": "M",
+          "6": "M",
+          "7": "M",
+          "8": "M"
+        },
+        "percent_under_136um_by_pressure_bar": {
+          "1.5": 25,
+          "2": 28,
+          "3": 31,
+          "4": 32,
+          "5": 34,
+          "6": 35,
+          "7": 36,
+          "8": 36
+        },
+        "percent_under_622um_by_pressure_bar": {
+          "1.5": 97,
+          "2": 98,
+          "3": 99,
+          "4": 99,
+          "5": 99,
+          "6": 99,
+          "7": 99,
+          "8": 99
+        },
+        "source_reference": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "404072",
+      "name": "Portaugello girevole Eco · G 1/4″ BSP",
+      "short": "Portaugello girevole, tappo non incluso.",
+      "specs": "Portaugello girevole, tappo non incluso. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100321",
+      "capabilities": {
+        "connection": "G 1/4″ BSP",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "404072N",
+      "name": "Portaugello girevole Eco · 1/4″ NPT",
+      "short": "Portaugello girevole, versione filettata NPT, tappo non incluso.",
+      "specs": "Portaugello girevole, versione filettata NPT, tappo non incluso. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100321",
+      "capabilities": {
+        "connection": "1/4″ NPT",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "404082",
+      "name": "Portaugello girevole Eco · G 3/8″ BSP",
+      "short": "Portaugello girevole, tappo non incluso.",
+      "specs": "Portaugello girevole, tappo non incluso. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100321",
+      "capabilities": {
+        "connection": "G 3/8″ BSP",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402075",
+      "name": "Portaugello singolo · G 1/4″ maschio BSP",
+      "short": "Portaugello filettato con valvola di ritegno a diaframma.",
+      "specs": "Portaugello filettato con valvola di ritegno a diaframma. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100079",
+      "capabilities": {
+        "connection": "G 1/4″ M BSP",
+        "pressure_max_bar": 20,
+        "material": "EPDM",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402085",
+      "name": "Portaugello singolo · G 3/8″ femmina BSP",
+      "short": "Portaugello filettato con valvola di ritegno a diaframma.",
+      "specs": "Portaugello filettato con valvola di ritegno a diaframma. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100079",
+      "capabilities": {
+        "connection": "G 3/8″ F BSP",
+        "pressure_max_bar": 20,
+        "material": "EPDM",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402085V",
+      "name": "Portaugello singolo · G 3/8″ Viton",
+      "short": "Variante con valvola di ritegno a diaframma e materiale Viton.",
+      "specs": "Variante con valvola di ritegno a diaframma e materiale Viton. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100079",
+      "capabilities": {
+        "connection": "G 3/8″ F BSP",
+        "pressure_max_bar": 20,
+        "material": "Viton",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402075C",
+      "name": "Portaugello con rubinetto · G 1/4″",
+      "short": "Portaugello con valvola di ritegno e rubinetto d'arresto.",
+      "specs": "Portaugello con valvola di ritegno e rubinetto d'arresto. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100101",
+      "capabilities": {
+        "connection": "G 1/4″ M BSP",
+        "pressure_max_bar": 20,
+        "material": "EPDM",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402085C",
+      "name": "Portaugello con rubinetto · G 3/8″",
+      "short": "Portaugello con valvola di ritegno e rubinetto d'arresto.",
+      "specs": "Portaugello con valvola di ritegno e rubinetto d'arresto. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100101",
+      "capabilities": {
+        "connection": "G 3/8″ F BSP",
+        "pressure_max_bar": 20,
+        "material": "EPDM",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "402075VC",
+      "name": "Portaugello con rubinetto · G 1/4″ Viton",
+      "short": "Variante Viton con valvola di ritegno e rubinetto d'arresto.",
+      "specs": "Variante Viton con valvola di ritegno e rubinetto d'arresto. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100101",
+      "capabilities": {
+        "connection": "G 1/4″ M BSP",
+        "pressure_max_bar": 20,
+        "material": "Viton",
+        "sections": 1
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413221",
+      "name": "Corpo portaugello 413 · tubo 10 mm",
+      "short": "Corpo con antigoccia, attacco rapido e doppia codina.",
+      "specs": "Corpo con antigoccia, attacco rapido e doppia codina. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100254",
+      "capabilities": {
+        "pressure_max_bar": 20,
+        "hose_diameter_mm": 10
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413222",
+      "name": "Corpo portaugello 413 · tubo 13 mm",
+      "short": "Corpo con antigoccia, attacco rapido e doppia codina.",
+      "specs": "Corpo con antigoccia, attacco rapido e doppia codina. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100254",
+      "capabilities": {
+        "pressure_max_bar": 20,
+        "hose_diameter_mm": 13
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "413223",
+      "name": "Corpo portaugello 413 · tubo 19 mm",
+      "short": "Corpo con antigoccia, attacco rapido e doppia codina.",
+      "specs": "Corpo con antigoccia, attacco rapido e doppia codina. La compatibilità con barra, raccordi, materiali e ugello deve essere verificata sulla documentazione ufficiale.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100254",
+      "capabilities": {
+        "pressure_max_bar": 20,
+        "hose_diameter_mm": 19
+      }
+    }
+  ],
+  "categories": {
+    "controller": "Terminale / computer",
+    "rate_control": "Controllo rateo / PWM",
+    "flowmeter": "Flussimetro / sensore",
+    "valve": "Valvola",
+    "actuator": "Attuatore / portaugello selettivo",
+    "pump": "Pompa",
+    "filter": "Filtro",
+    "nozzle": "Ugello",
+    "nozzle_holder": "Portaugello",
+    "ecu": "Centralina / ECU irroratrice"
+  },
+  "source_index": [
+    {
+      "name": "ASJ AFC 80/110 low-drift nozzles",
+      "url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "technical_data": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+    },
+    {
+      "name": "ASJ WRC 80/110 traditional fan nozzles",
+      "url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "technical_data": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-DC6010-2021-09-COMPLETO-rid.pdf"
+    },
+    {
+      "name": "ARAG / Nordson product catalogue: PWM Flowtron, SELETRON, controllers, meters, valves, filters, pumps",
+      "url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1"
+    },
+    {
+      "name": "ASJ Standard Flat Fan SF 80/110 complete catalogue 2023",
+      "url": "https://asjnozzle.it/wp-content/uploads/Catalogo-ASJ-2023-COMPLETO.pdf",
+      "technical_data": "https://asjnozzle.it/wp-content/uploads/low-drift.pdf"
+    },
+    {
+      "name": "ARAG/Nordson nozzle holders and accessories",
+      "url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1"
+    },
+    {
+      "name": "Bravo 300S 5 sezioni (scheda distributore Kramp)",
+      "url": "https://kramp.com/shop-us/en/p/bravo-300s-5-tb-spray-computer--46731501"
+    }
+  ]
+}

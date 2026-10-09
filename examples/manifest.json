@@ -1,0 +1,50 @@
+[
+  {
+    "id": "zone_poligonali",
+    "file": "01_zone_poligonali_pomodoro.zip",
+    "title": "01 · Pomodoro · 4 zone poligonali (150–340 L/ha)",
+    "description": "Campo di 23 ha con quattro zone TZN disegnate come poligoni (una macchia con buco). Le zone più dense superano la portata di un AFC11002 a 8 km/h: ottimo per vedere che cosa cambia cambiando ugello."
+  },
+  {
+    "id": "griglia_tipo1",
+    "file": "02_griglia_tipo1_frumento.zip",
+    "title": "02 · Frumento · griglia a zone con fascia di rispetto",
+    "description": "Griglia GRD tipo 1 (celle da 20 m con codice zona) a quattro ratei, più una fascia a sud a dose zero."
+  },
+  {
+    "id": "griglia_tipo2",
+    "file": "03_griglia_tipo2_mappa_continua.zip",
+    "title": "03 · Mais · mappa continua (70–360 L/ha)",
+    "description": "Griglia GRD tipo 2: un valore diverso per ogni cella da 12 m, come in una mappa di vigore. Molte classi, utile per le fasce di dosaggio."
+  },
+  {
+    "id": "uniforme",
+    "file": "04_rateo_uniforme.zip",
+    "title": "04 · Rateo unico 200 L/ha",
+    "description": "Una sola zona senza geometria: tutto il campo allo stesso rateo. Serve a verificare la fattibilità di un valore costante."
+  },
+  {
+    "id": "due_task",
+    "file": "05_due_campi_due_task.zip",
+    "title": "05 · Due campi, due operazioni",
+    "description": "Un file con due appezzamenti e due task (zone poligonali + griglia). Il selettore di operazione compare in alto."
+  },
+  {
+    "id": "senza_geometria",
+    "file": "06_zone_senza_geometria.zip",
+    "title": "06 · Zone senza geometria nel file",
+    "description": "Tre ratei ma nessuna posizione (né poligoni né griglia): l'app lo dichiara e non disegna zone inventate."
+  },
+  {
+    "id": "senza_georef",
+    "file": "07_griglia_senza_coordinate.zip",
+    "title": "07 · Griglia senza coordinate (A–D mancanti)",
+    "description": "Alcuni software omettono la posizione della griglia: l'app la adatta al campo e lo segnala."
+  },
+  {
+    "id": "xfr_senza_vpn",
+    "file": "08_file_esterno_e_dosi_senza_vpn.zip",
+    "title": "08 · Campo in file esterno (XFR) e dosi senza VPN",
+    "description": "Caso reale frequente: il campo sta in un XML esterno e i ratei sono interi in mm³/m² senza tabella VPN."
+  }
+]

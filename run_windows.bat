@@ -1,26 +1,24 @@
 @echo off
 setlocal
 cd /d "%~dp0"
+title Ultimo Metro
+set "PY="
+for %%C in ("py -3" "python" "python3") do (
+  if not defined PY (
+    %%~C -c "import sys; sys.exit(0 if sys.version_info>=(3,9) else 1)" >nul 2>nul && set "PY=%%~C"
+  )
+)
+if not defined PY (
+  echo.
+  echo  Python 3.9 o piu' recente non trovato.
+  echo  Installalo da https://www.python.org/downloads/  ^(spunta "Add python.exe to PATH"^)
+  echo  poi fai doppio clic su questo file.
+  echo.
+  start "" https://www.python.org/downloads/
+  pause
+  exit /b 1
+)
+%PY% app.py
 echo.
-echo ================================================
-echo             ULTIMO METRO - DEMO
-echo ================================================
-echo.
-where py >nul 2>nul
-if %errorlevel%==0 goto use_py
-where python >nul 2>nul
-if %errorlevel%==0 goto use_python
-echo Python non trovato. Installa Python 3.10 o successivo da https://www.python.org/downloads/
-echo Durante l'installazione seleziona Add Python to PATH.
+echo  Il server si e' fermato. Se vedi un errore qui sopra, copialo e mandamelo.
 pause
-goto end
-:use_py
-start "Ultimo Metro Browser" cmd /c "timeout /t 2 >nul & start http://127.0.0.1:5000"
-py -3 app.py
-goto end
-:use_python
-start "Ultimo Metro Browser" cmd /c "timeout /t 2 >nul & start http://127.0.0.1:5000"
-python app.py
-goto end
-:end
-endlocal

@@ -1,215 +1,126 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#007AC9">
-  <title>Ultimo Metro · Pre-flight agricolo</title>
-  <link rel="stylesheet" href="/static/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#007AC9">
+<title>Ultimo Metro · ISOXML su misura per il tuo hardware Nordson</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23007AC9'/%3E%3Crect x='7' y='21' width='18' height='4' rx='2' fill='white'/%3E%3Ccircle cx='23' cy='9' r='4.5' fill='%23E03040'/%3E%3C/svg%3E">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="#top" aria-label="Ultimo Metro home">
-        <span class="brand-mark"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M22 35V17"/><path d="M22 24C10 24 8 15 8 9c9 0 15 4 14 15Z"/><path d="M22 19C22 9 29 6 37 6c0 9-4 15-15 17Z"/><path d="M14 35h16"/></svg></span>
-        <span class="brand-copy"><strong>ULTIMO METRO</strong><small>FIELD-TO-MACHINE</small></span>
-      </a>
-      <div class="workspace-label">WORKSPACE</div>
-      <nav class="main-nav" aria-label="Navigazione principale">
-        <a class="nav-item active" href="#overview"><span class="nav-icon">◫</span> Panoramica <span class="nav-indicator"></span></a>
-        <a class="nav-item" href="#import"><span class="nav-icon">⇧</span> Importa ISOXML</a>
-        <a class="nav-item" href="#hardware"><span class="nav-icon">⌁</span> Setup macchina</a>
-        <a class="nav-item" href="#labels"><span class="nav-icon">▤</span> Banca dati etichette</a>
-        <a class="nav-item" href="#validation"><span class="nav-icon">✓</span> Verifica piano</a>
-        <a class="nav-item" href="#export"><span class="nav-icon">⇩</span> Esporta</a>
-      </nav>
-      <div class="sidebar-spacer"></div>
-      <div class="partner-card">
-        <span class="partner-overline">CONCEPT HACKATHON</span>
-        <strong>Compatibilità prima del campo.</strong>
-        <p>Un ponte operativo tra FMIS, attrezzatura e lavoro eseguito.</p>
-        <div class="partner-tags"><span>xFarm</span><span>ARAG</span><span>ISOXML</span></div>
-      </div>
-      <div class="sidebar-bottom"><span class="live-dot"></span> Prototipo locale <span class="version">v0.3</span></div>
-    </aside>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"></span><div><b>Ultimo Metro</b><small>ISOXML su misura per il tuo hardware Nordson</small></div></div>
+  <nav class="steps" aria-label="Fasi">
+    <span class="step on" id="st1"><i>1</i>File ISOXML</span>
+    <span class="step" id="st2"><i>2</i>Il tuo hardware</span>
+    <span class="step" id="st3"><i>3</i>Scarica</span>
+  </nav>
+  <button class="btn" id="btn-share" type="button">Condividi con gli amici</button>
+</header>
 
-    <main class="main-content" id="top">
-      <header class="topbar">
-        <div class="crumbs"><span>Workspace</span><b>/</b><strong>Pre-flight</strong></div>
-        <div class="topbar-right"><span class="demo-pill"><span class="demo-pill-dot"></span> AMBIENTE DEMO</span><div class="avatar">UM</div></div>
-      </header>
+<main>
+  <!-- ===================== 1 · Caricamento ===================== -->
+  <section id="landing" hidden>
+    <div class="hero">
+      <h1>Dal file della prescrizione alla tua irroratrice Nordson</h1>
+      <p>Carica l'ISOXML del campo. Scegli l'hardware che hai sulla macchina: vedi subito <b>dove il trattamento riesce e dove no</b>, e scarichi un file <b>specializzato per il tuo impianto</b>.</p>
+    </div>
+    <label class="drop" id="drop" for="file">
+      <b>Trascina qui il file ISOXML</b>
+      <span class="mut">.zip con TASKDATA.XML oppure direttamente TASKDATA.XML</span><br>
+      <span class="btn primary" role="button">Scegli un file dal computer</span>
+      <input id="file" type="file" accept=".zip,.xml,application/zip,text/xml" hidden>
+    </label>
+    <div id="landing-err" class="alert red" hidden></div>
+    <div class="how">
+      <div><b>1 · Carichi la prescrizione</b>Vedi subito campo, zone, ratei e superfici che il file contiene.</div>
+      <div><b>2 · Scegli il tuo hardware</b>Terminale, Flowtron, SELETRON, ugelli… La mappa si aggiorna a ogni modifica.</div>
+      <div><b>3 · Scarichi il file su misura</b>I ratei che il tuo impianto non può erogare vengono portati a ciò che davvero riesce a fare.</div>
+    </div>
+    <h2>Oppure prova con un esempio</h2>
+    <div class="examples" id="examples"></div>
+    <p class="mut small" style="margin-top:22px">Il file resta nella tua sessione su questo server: gli altri visitatori non lo vedono. Gli esempi sono dati di prova, non campi reali.</p>
+  </section>
 
-      <section class="page-heading" id="overview">
-        <div>
-          <div class="eyebrow"><span class="eyebrow-line"></span> PRECISION OPERATIONS</div>
-          <h1>Dal piano alla macchina<span>.</span></h1>
-          <p class="subtitle">Verifica il piano agronomico prima di partire. Compatibilità hardware, condizioni operative e un export pronto per il passaggio successivo.</p>
+  <!-- ===================== 2 · Area di lavoro ===================== -->
+  <section id="workspace" hidden>
+    <div class="card filebar">
+      <div><div class="name" id="fb-name"></div><div class="meta" id="fb-meta"></div></div>
+      <select id="task-sel" aria-label="Operazione del file" hidden></select>
+      <button class="btn sm" id="btn-newfile" type="button" style="margin-left:auto">Cambia file</button>
+    </div>
+    <div id="fb-warn"></div>
+
+    <div class="layout">
+      <aside class="card hw" id="hw" aria-label="Hardware">
+        <div class="hwhead"><h2>Il tuo hardware Nordson</h2><p>Cambia un componente: mappa ed esiti si aggiornano subito.</p></div>
+        <div style="padding:12px 16px 4px">
+          <label class="f" for="preset" style="margin-top:0">Configurazione di partenza</label>
+          <select id="preset"></select>
         </div>
-        <div class="heading-actions"><span class="status-chip"><span class="status-chip-dot"></span> Pre-flight workspace</span></div>
-      </section>
-
-      <section class="stepper" aria-label="Fasi del flusso">
-        <div class="step done"><span class="step-number">✓</span><span><b>01</b><small>IMPORTA</small></span></div>
-        <span class="step-line"></span>
-        <div class="step current"><span class="step-number">02</span><span><b>02</b><small>ANALIZZA</small></span></div>
-        <span class="step-line"></span>
-        <div class="step"><span class="step-number">03</span><span><b>03</b><small>CONFIGURA</small></span></div>
-        <span class="step-line"></span>
-        <div class="step"><span class="step-number">04</span><span><b>04</b><small>ESPORTA</small></span></div>
-      </section>
-
-      <div id="globalMessage" class="global-message hidden" role="status"></div>
-      <aside class="network-note" aria-label="Accesso dalla rete locale">
-        <span class="network-note-icon">⌁</span>
-        <div><strong>Condivisione sulla rete locale</strong><p>Per collegare gli amici, aprire l'indirizzo LAN mostrato nel terminale del computer che avvia la demo, ad esempio <code>http://192.168.1.25:5000</code> — non <code>127.0.0.1</code>. La demo usa una sessione condivisa: chi importa un file modifica l'analisi vista dagli altri.</p></div>
+        <div id="hw-alerts" style="padding:0 16px"></div>
+        <details class="grp" open id="g-nozzles"><summary>Ugelli <span class="chip-sum" id="s-nozzles"></span></summary><div class="body" id="b-nozzles"></div></details>
+        <details class="grp" open id="g-chain"><summary>Catena di controllo <span class="chip-sum" id="s-chain"></span></summary><div class="body" id="b-chain"></div></details>
+        <details class="grp" id="g-work"><summary>Barra e lavoro <span class="chip-sum" id="s-work"></span></summary><div class="body" id="b-work"></div></details>
+        <details class="grp" id="g-spec"><summary>Specializzazione <span class="chip-sum" id="s-spec"></span></summary><div class="body" id="b-spec"></div></details>
       </aside>
 
-      <section class="upload-card panel" id="import">
-        <div class="panel-heading upload-heading">
-          <div class="section-title-wrap"><span class="section-icon upload-icon">⇧</span><div><h2>Importa il piano di lavoro</h2><p>Carica l'export ISOXML del tuo FMIS, oppure usa il pacchetto sintetico incluso.</p></div></div>
-          <span class="format-label">ISO 11783-10 <span class="format-separator">·</span> XML / ZIP</span>
+      <div class="maincol">
+        <div class="verdict" id="verdict"></div>
+        <p class="jump"><button class="btn sm" id="btn-jump" type="button">Cambia ugelli e hardware ↓</button></p>
+        <div class="changebar" id="changebar" hidden></div>
+
+        <div class="card" style="margin-top:16px">
+          <header>
+            <h2>Il campo</h2>
+            <div class="seg" id="views" role="group" aria-label="Vista della mappa">
+              <button type="button" data-v="rx" aria-pressed="false">Prescrizione</button>
+              <button type="button" data-v="hw" aria-pressed="true">Sul tuo hardware</button>
+              <button type="button" data-v="after" aria-pressed="false">File specializzato</button>
+              <button type="button" data-v="diff" aria-pressed="false" disabled>Rispetto a prima</button>
+            </div>
+          </header>
+          <div class="mapwrap"><canvas id="map" role="img" aria-label="Mappa del campo"></canvas><div class="mapmsg" id="mapmsg" hidden></div><div class="tip" id="tip" hidden></div></div>
+          <div class="legend" id="legend"></div>
+          <div class="detail" id="detail"></div>
         </div>
-        <div class="upload-content">
-          <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Seleziona o trascina un file ISOXML">
-            <input id="fileInput" type="file" accept=".xml,.zip,.isoxml,application/zip,text/xml,application/xml" hidden>
-            <div class="upload-symbol"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 31V7m0 0-9 9m9-9 9 9"/><path d="M9 29v10a3 3 0 0 0 3 3h24a3 3 0 0 0 3-3V29"/></svg></div>
-            <div class="drop-main"><strong>Trascina qui il tuo file</strong><span>oppure <u>sfoglia dal computer</u></span></div>
-            <p>Supportati: TASKDATA.XML, .ZIP e pacchetti ISOXML. Max 25 MB.</p>
+
+        <div class="kpis" id="kpis"></div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="tabs" role="tablist" id="tabs">
+            <button role="tab" aria-selected="true" data-t="zones">Zone</button>
+            <button role="tab" aria-selected="false" data-t="nozzles">Ugelli e portate</button>
+            <button role="tab" aria-selected="false" data-t="labels">Etichette</button>
+            <button role="tab" aria-selected="false" data-t="weather">Meteo</button>
+            <button role="tab" aria-selected="false" data-t="how">Come si calcola</button>
           </div>
-          <div class="upload-divider"><span>OPPURE</span></div>
-          <button id="loadDemoBtn" class="demo-file-button" type="button"><span class="demo-file-icon">▤</span><span><strong>Prova con il file demo</strong><small>Pomodoro · 18,6 ha · 2 zone di prescrizione</small></span><span class="arrow-right">→</span></button>
+          <div id="tab-zones"></div>
+          <div id="tab-nozzles" hidden></div>
+          <div id="tab-labels" hidden></div>
+          <div id="tab-weather" hidden></div>
+          <div id="tab-how" hidden class="prose"></div>
         </div>
-        <div class="loaded-file-bar hidden" id="loadedFileBar"><span class="file-badge">XML</span><div class="loaded-file-copy"><strong id="loadedFileName">TASKDATA.XML</strong><small id="loadedFileMeta">Pacchetto letto</small></div><span class="loaded-success"><span>✓</span> IMPORTATO</span><button type="button" id="resetBtn" class="text-button">Sostituisci file</button><button type="button" id="clearBtn" class="danger-text-button">Rimuovi e ricomincia</button></div>
-      </section>
-
-      <div id="workspace" class="hidden">
-        <section class="metrics-grid" aria-label="Riepilogo file">
-          <article class="metric-card"><div class="metric-top"><span>OPERAZIONI</span><span class="metric-icon blue">↗</span></div><div class="metric-main"><strong id="metricTasks">—</strong><span class="metric-suffix">task</span></div><div class="metric-foot"><span class="tiny-dot blue-dot"></span><span id="metricTaskFoot">Operazioni individuate</span></div></article>
-          <article class="metric-card"><div class="metric-top"><span>SUPERFICIE NEL FILE</span><span class="metric-icon green">⌗</span></div><div class="metric-main"><strong id="metricArea">—</strong><span class="metric-suffix">ha</span></div><div class="metric-foot"><span class="tiny-dot green-dot"></span><span>Somma delle superfici PFD</span></div></article>
-          <article class="metric-card"><div class="metric-top"><span>ZONE DI PRESCRIZIONE</span><span class="metric-icon amber">▦</span></div><div class="metric-main"><strong id="metricZones">—</strong><span class="metric-suffix">zone</span></div><div class="metric-foot"><span class="tiny-dot amber-dot"></span><span id="metricZoneFoot">TZN / GRD rilevati</span></div></article>
-          <article class="metric-card"><div class="metric-top"><span>PRODOTTI NEL FILE</span><span class="metric-icon purple">◈</span></div><div class="metric-main"><strong id="metricProducts">—</strong><span class="metric-suffix">voci</span></div><div class="metric-foot"><span class="tiny-dot purple-dot"></span><span>Catalogo PDT incluso</span></div></article>
-        </section>
-
-        <section class="content-grid">
-          <div class="left-stack">
-            <article class="panel field-panel">
-              <div class="panel-heading"><div><div class="section-kicker">CONTESTO DEL CAMPO</div><h2>Area di lavoro</h2></div><span class="small-chip" id="fieldCropChip">Coltura</span></div>
-              <div class="field-summary"><div><span class="field-name" id="fieldName">Campo importato</span><span class="field-sub" id="fieldSub">Dati letti dal TASKDATA</span></div><div class="field-area"><strong id="fieldArea">—</strong><span>ettari</span></div></div>
-              <div class="map-frame">
-                <div class="map-topline"><span><span class="map-pin">⌖</span> Confine del campo + compatibilità per zona</span><span class="map-scale" id="mapModeTag">ANTEPRIMA</span></div>
-                <svg id="fieldMap" class="field-map" viewBox="0 0 540 245" role="img" aria-label="Anteprima schematica del campo">
-                  <defs><pattern id="gridPattern" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="#d8e4db" stroke-width="0.7"/></pattern></defs>
-                  <rect width="540" height="245" fill="#f3f7f2"/><rect width="540" height="245" fill="url(#gridPattern)"/>
-                  <path d="M83 45 L419 31 L455 174 L331 211 L102 188 Z" fill="#c9dfc4" stroke="#426d48" stroke-width="2"/>
-                  <path d="M83 45 L251 38 L262 199 L102 188 Z" fill="#a8cfa2" opacity=".92"/>
-                  <path d="M251 38 L419 31 L455 174 L262 199 Z" fill="#dbe8b7" opacity=".94"/>
-                  <path d="M83 45 L419 31 L455 174 L331 211 L102 188 Z" fill="none" stroke="#537d58" stroke-width="2" stroke-dasharray="5 4"/>
-                  <text x="161" y="112" class="map-zone-label">ZONA A</text><text x="161" y="128" class="map-zone-sub">schema di lavoro</text>
-                  <text x="331" y="112" class="map-zone-label">ZONA B</text><text x="331" y="128" class="map-zone-sub">schema di lavoro</text>
-                  <g transform="translate(20 18)"><rect width="116" height="25" rx="6" fill="#fff" stroke="#dce6de"/><circle cx="12" cy="12.5" r="3.3" fill="#42784c"/><text x="22" y="16" class="map-tag">FIELD PREVIEW</text></g>
-                </svg>
-                <div class="map-legend"><span><i class="legend-swatch coverage-good"></i> Verde · margine sufficiente</span><span><i class="legend-swatch coverage-warn"></i> Giallo · velocità da ridurre</span><span><i class="legend-swatch coverage-bad"></i> Rosso · non fattibile nel profilo</span></div>
-                <div class="map-note" id="mapNote"><span>ⓘ</span> Il contorno viene letto da ISOXML quando presente. Le zone colorate sono una stima dimostrativa della capacità, non una mappa di irrorazione realmente eseguita.</div>
-              </div>
-              <div class="field-footer"><div><span class="footer-label">ORIGINE DATI</span><strong id="sourceSoftware">FMIS non indicato</strong></div><div><span class="footer-label">VERSIONE</span><strong id="isoVersion">ISOXML —</strong></div><div><span class="footer-label">FILE IN PACCHETTO</span><strong id="packageFiles">—</strong></div><div><span class="footer-label">DISPOSITIVI DESCRITTI (DVC)</span><strong id="isoDevices">Non indicati</strong></div></div>
-            </article>
-
-            <article class="panel prescription-panel">
-              <div class="panel-heading"><div><div class="section-kicker">PRESCRIZIONE IMPORTATA</div><h2>Zone e valori target</h2></div><span class="small-chip neutral-chip" id="gridStatus">Lettura ISOXML</span></div>
-              <div id="zoneList" class="zone-list"><div class="empty-state">Nessuna zona trovata nel file.</div></div>
-              <div class="prescription-foot"><span class="info-circle">i</span><span>I valori sono interpretati tramite gli attributi VPN quando disponibili. Le mappe binarie GRD sono conservate nel pacchetto, ma non vengono riscritte da questa demo.</span></div>
-            </article>
-
-            <article class="panel label-panel" id="labels">
-              <div class="panel-heading"><div><div class="section-kicker">CONTROLLO PRODOTTI</div><h2>Banca dati etichette</h2></div><span class="small-chip label-db-chip" id="labelDbStatus">CATALOGO VUOTO</span></div>
-              <p class="panel-intro">I prodotti provengono dal piano ISOXML. Il collegamento alla banca dati delle etichette è separato dalla prescrizione: un nome nel file non dimostra da solo che prodotto, coltura, impiego e dose siano autorizzati.</p>
-              <div class="label-product-select">
-                <label class="field-control"><span>Prodotto da verificare (PDT)</span><select id="labelProductSelect"><option value="">Importa un ISOXML per vedere i prodotti</option></select></label>
-                <div id="labelProductContext" class="label-product-context">In attesa di un prodotto ISOXML.</div>
-              </div>
-              <div id="labelRecordView" class="label-record-view"><div class="label-empty-state"><strong>Nessuna scheda etichetta abbinata</strong><p>Questa demo non interroga ancora una fonte ufficiale e non include etichette fitosanitarie simulate. Le schede locali possono essere aggiunte in <code>static/labels_catalog.json</code>, indicando sempre fonte e data di verifica.</p></div></div>
-              <div class="label-check-grid" id="labelCheckGrid">
-                <div class="label-check-item"><span>01</span><div><strong>Fonte ufficiale e registrazione</strong><small>Da collegare / verificare</small></div></div>
-                <div class="label-check-item"><span>02</span><div><strong>Coltura e impiego autorizzato</strong><small>Da verificare</small></div></div>
-                <div class="label-check-item"><span>03</span><div><strong>Dose e numero di applicazioni</strong><small>Da verificare</small></div></div>
-                <div class="label-check-item"><span>04</span><div><strong>Vincoli meteo, deriva e fasce</strong><small>Da verificare</small></div></div>
-                <div class="label-check-item"><span>05</span><div><strong>Tempi di carenza e rientro</strong><small>Da verificare</small></div></div>
-              </div>
-              <div class="label-disclaimer"><strong>Nota:</strong> finché non viene collegata una fonte autorevole e verificata la scheda esatta, la demo non può dichiarare il trattamento conforme all'etichetta.</div>
-            </article>
-          </div>
-
-          <div class="right-stack">
-            <article class="panel preflight-panel" id="validation">
-              <div class="panel-heading"><div><div class="section-kicker">ESITO AUTOMATICO</div><h2>Pre-flight check</h2></div><span class="pulse-check">● LIVE</span></div>
-              <div id="overallStatus" class="overall-status neutral"><span class="overall-icon">✓</span><div><strong>In attesa di verifica</strong><small>Configura la macchina per completare il controllo.</small></div></div>
-              <div id="checkList" class="check-list"><div class="check-row"><span class="check-symbol">•</span><div><strong>Struttura ISOXML</strong><small>Carica un file per iniziare.</small></div><span class="check-state">—</span></div></div>
-              <div class="preflight-bottom"><span class="tiny-shield">✓</span> Nessuna dose viene modificata automaticamente in questa versione.</div>
-            </article>
-
-            <article class="panel weather-panel">
-              <div class="panel-heading"><div><div class="section-kicker">CONDIZIONI OPERATIVE</div><h2>Finestra meteo</h2></div><button type="button" id="loadWeatherBtn" class="quiet-button">↻ Meteo live</button></div>
-              <p class="panel-intro">Dati attuali o inseriti dall'operatore. Il semaforo usa soglie dimostrative, non sostituisce etichetta e valutazione agronomica.</p>
-              <div class="weather-status-row"><div class="weather-orb green-orb" id="weatherOrb"><span></span></div><div class="weather-status-copy"><strong id="weatherStatusText">Condizioni favorevoli</strong><small id="weatherStatusDetail">Modifica i parametri per aggiornare il semaforo.</small></div><span class="weather-tag green-tag" id="weatherTag">VERDE</span></div>
-              <div class="weather-inputs">
-                <label><span>Vento</span><div class="input-unit"><input id="wind" type="number" value="8" min="0" max="100" step="1"><em>km/h</em></div></label>
-                <label><span>Temperatura</span><div class="input-unit"><input id="temperature" type="number" value="24" min="-20" max="60" step="1"><em>°C</em></div></label>
-                <label><span>Pioggia prevista tra</span><div class="input-unit"><input id="rainHours" type="number" value="6" min="0" max="72" step="1"><em>ore</em></div></label>
-              </div>
-              <div class="weather-footnote" id="weatherSourceNote">Modalità manuale/demo · inserisci i dati conosciuti sul campo.</div>
-            </article>
-
-            <article class="panel hardware-panel" id="hardware">
-              <div class="panel-heading"><div><div class="section-kicker">COMPATIBILITÀ ATTREZZATURA</div><h2>Setup macchina</h2></div><span class="small-chip arag-chip"><span class="arag-mark">A</span> ARAG-ready concept</span></div>
-              <p class="panel-intro">Seleziona i codici realmente montati sulla macchina. Questa configurazione è indipendente dalla prescrizione: eventuali DVC nell'ISOXML sono solo un riferimento e non sostituiscono la conferma dell'hardware presente. Il cambio di HW aggiorna la fattibilità per zona; i dati mancanti restano da verificare.</p>
-              <div class="catalog-status"><span class="catalog-status-dot"></span><span>Catalogo iniziale da schede pubbliche Nordson Precision Agriculture / ARAG / ASJ.</span><a href="/static/arag_catalog.json" target="_blank" rel="noopener">Apri catalogo dati ↗</a></div>
-              <div class="hardware-catalog-grid">
-                <label class="field-control wide"><span>Terminale / computer</span><select id="controllerCode" data-catalog-category="controller"><option value="4675204">4675204 · Delta 70T IBX</option></select></label>
-                <label class="field-control wide"><span>Controllo rateo / PWM</span><select id="rateControlCode" data-catalog-category="rate_control"><option value="4679013">4679013 · IBX100 ISOBUS Flowtron</option></select></label>
-                <label class="field-control wide"><span>Centralina / ECU irroratrice (se separata)</span><select id="ecuCode" data-catalog-category="ecu"><option value="">Non dichiarata / integrata</option></select></label>
-                <label class="field-control"><span>Flussimetro / sensore</span><select id="flowmeterCode" data-catalog-category="flowmeter"><option value="46211P40000">46211P40000 · ORION 2+ 2–200 L/min</option></select></label>
-                <label class="field-control"><span>Valvola</span><select id="valveCode" data-catalog-category="valve"><option value="853T04A55">853T04A55 · valvola 853</option></select></label>
-                <label class="field-control"><span>Attuatore / portaugello selettivo</span><select id="actuatorCode" data-catalog-category="actuator"><option value="4063T95A0">4063T95A0 · SELETRON</option></select></label>
-                <label class="field-control"><span>Pompa</span><select id="pumpCode" data-catalog-category="pump"><option value="97055201">97055201 · MSP400</option></select></label>
-                <label class="field-control"><span>Ugello</span><select id="nozzleCode" data-catalog-category="nozzle"><option value="AFC11002">AFC11002 · ASJ/ARAG antideriva</option></select></label>
-                <label class="field-control"><span>Portaugello</span><select id="nozzleHolderCode" data-catalog-category="nozzle_holder"><option value="002750B">002750B · portaugello ARAG</option></select></label>
-                <label class="field-control"><span>Filtro</span><select id="filterCode" data-catalog-category="filter"><option value="42433135">42433135 · filtro 80 mesh</option></select></label>
-              </div>
-              <div id="hardwareCatalogResult" class="hardware-catalog-result"><strong>Configurazione ARAG</strong><p>Seleziona i codici installati per vedere specifiche e avvertenze.</p></div>
-              <div class="profile-summary" id="profileSummary"><span class="profile-summary-icon">▦</span><span><b>Profilo macchina demo</b><small>Barra 18 m · serbatoio 1.200 L · portata di riferimento 60 L/min · velocità 5–10 km/h</small></span><button type="button" id="toggleAdvancedBtn" class="quiet-button">Parametri profilo</button></div>
-              <div id="advancedSettings" class="advanced-settings hidden">
-                <p>Questi dati sono proprietà del profilo macchina/demo e possono essere salvati una volta per attrezzatura. Nella versione reale arriverebbero da anagrafica macchina, telemetria o calibrazione.</p>
-                <div class="hardware-grid">
-                  <label class="field-control"><span>Capacità serbatoio</span><div class="input-unit"><input id="tank" type="number" min="100" max="50000" step="50" value="1200"><em>L</em></div></label>
-                  <label class="field-control"><span>Larghezza barra</span><div class="input-unit"><input id="width" type="number" min="1" max="60" step="0.5" value="18"><em>m</em></div></label>
-                  <label class="field-control"><span>Portata utile validata nel profilo</span><div class="input-unit"><input id="flow" type="number" min="1" max="2000" step="1" value="60"><em>L/min</em></div><small>Non deducibile da un solo codice componente.</small></label>
-                  <label class="field-control"><span>Velocità min.</span><div class="input-unit"><input id="speedMin" type="number" min="1" max="30" step="0.5" value="5"><em>km/h</em></div></label>
-                  <label class="field-control"><span>Velocità max.</span><div class="input-unit"><input id="speedMax" type="number" min="1" max="30" step="0.5" value="10"><em>km/h</em></div></label>
-                  <label class="field-control"><span>Volume target di fallback</span><div class="input-unit"><input id="targetRate" type="number" min="1" max="5000" step="5" value="250"><em>L/ha</em></div><small id="targetRateSource">Usato solo se il file non ha una dose leggibile.</small></label>
-                </div>
-                <div class="flow-formula"><span class="formula-icon">ƒx</span><span>Portata richiesta = <b>dose × velocità × larghezza / 600</b>. La dose importata non viene modificata automaticamente.</span></div>
-                <div class="profile-actions"><button type="button" id="saveProfileBtn" class="quiet-button">Salva profilo in questo browser</button><small id="profileSaveStatus">La configurazione vale per questo browser finché non la salvi.</small></div>
-              </div>
-              <div id="hardwareResult" class="hardware-result"><div class="result-icon">↗</div><div><strong>In attesa dei parametri</strong><small>La capacità teorica sarà calcolata in base al profilo macchina e alle dosi per zona.</small></div></div>
-            </article>
-          </div>
-        </section>
-
-        <section class="panel validation-details-panel">
-          <div class="panel-heading"><div><div class="section-kicker">DIAGNOSTICA FILE</div><h2>Controlli e osservazioni</h2></div><span class="diagnostic-caption">Parser XML · analisi locale</span></div>
-          <div id="validationDetails" class="validation-details"></div>
-        </section>
-
-        <section class="export-section panel" id="export">
-          <div class="export-copy"><div class="export-symbol">⇩</div><div><div class="section-kicker">OUTPUT OPERATIVO</div><h2>Esporta il pacchetto annotato</h2><p>Preserva TASKDATA.XML e gli eventuali file GRD/TLG originali; aggiunge a ogni task una nota CAN ISOXML con la sintesi del pre-flight.</p><div class="export-disclaimer"><span>!</span> Questa demo non riscrive i valori target né le griglie di dose e non garantisce la validazione su un terminale ARAG reale.</div></div></div>
-          <div class="export-actions"><div class="export-ready"><span class="ready-dot"></span><span id="exportReadyText">Pronto per l'esportazione demo</span></div><button id="exportBtn" class="primary-button" type="button"><span>Esporta ISOXML annotato</span><b>→</b></button><small>Output ZIP · compatibilità hardware da verificare sul controller specifico</small></div>
-        </section>
       </div>
+    </div>
 
-      <footer class="page-footer"><span>ULTIMO METRO <i>·</i> HACKATHON PROTOTYPE</span><span>Non è un sistema di prescrizione agronomica certificato.</span></footer>
-    </main>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/static/app.js"></script>
+    <div class="exportbar" id="exportbar">
+      <div class="info"><b id="ex-title">File specializzato</b><span class="mut small" id="ex-sub"></span></div>
+      <label class="check" id="ex-approve-wrap" hidden><input type="checkbox" id="ex-approve"><span>Ho controllato i ratei che cambiano</span></label>
+      <button class="btn" id="btn-report" type="button">Rapporto</button>
+      <button class="btn primary" id="btn-export" type="button">Scarica ISOXML<span class="long"> per il mio hardware</span></button>
+    </div>
+  </section>
+</main>
+
+<dialog id="share-dlg">
+  <div class="dh"><h2>Apri Ultimo Metro dagli altri dispositivi</h2><button class="btn sm" id="share-close" type="button">Chiudi</button></div>
+  <div class="db" id="share-body"></div>
+</dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script src="/vendor/qrcode.js"></script>
+<script type="module" src="/js/main.js"></script>
 </body>
 </html>
