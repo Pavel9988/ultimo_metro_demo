@@ -21,13 +21,21 @@ class IsoXmlDemoTests(unittest.TestCase):
         self.assertAlmostEqual(summary["total_area_ha"], 18.6)
         self.assertAlmostEqual(summary["target_rate_l_ha"], 250.0)
 
-    def test_export_adds_two_comments_and_preserves_target_values(self):
+    def test_export_adds_hardware_weather_notes_and_preserves_target_values(self):
         package, filename, count = app.api_export_package({
             "tank_l": 1200,
             "speed_min": 5,
             "speed_max": 10,
             "weather_status": "GIALLA",
             "controller": "Bravo 400S",
+            "rate_control_code": "4679013",
+            "flowmeter_code": "46211P40000",
+            "valve_code": "853T04A55",
+            "actuator_code": "4063T95A0",
+            "pump_code": "97055201",
+            "nozzle_code": "AFC11002",
+            "filter_code": "42433135",
+            "nozzle_holder_code": "002750B",
             "wind_kmh": 11,
             "temperature_c": 29,
             "rain_hours": 3,
@@ -38,6 +46,11 @@ class IsoXmlDemoTests(unittest.TestCase):
             root = app.safe_parse_xml(archive.read("TASKDATA.XML"))
             comments = [node.attrib.get("C", "") for node in app.descendants(root, "CAN")]
             self.assertIn("UM HW T1200L V5-10 B400", comments)
+            self.assertIn("UM ARAG TB400 R4679013", comments)
+            self.assertIn("UM FLOW F46211P40000 V853T04A55", comments)
+            self.assertIn("UM ACT A4063T95A0 P97055201", comments)
+            self.assertIn("UM NOZ NAFC11002 F42433135", comments)
+            self.assertIn("UM HOLD 002750B", comments)
             self.assertIn("UM WX GIALLA W11 T29 R3", comments)
             values = [app.attr(node, "B") for node in app.descendants(root, "PDV")]
             self.assertEqual(values, ["2500000", "1800000"])
@@ -50,9 +63,15 @@ class IsoXmlDemoTests(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(second)) as archive:
             root = app.safe_parse_xml(archive.read("TASKDATA.XML"))
             comments = [node.attrib.get("C", "") for node in app.descendants(root, "CAN")]
-        self.assertEqual(len(comments), 2)
+        self.assertEqual(len(comments), 8)
         self.assertIn("UM HW T1500L V5-10 B180", comments)
-        self.assertIn("UM WX ROSSA", comments[1])
+        self.assertTrue(any(note.startswith("UM WX ROSSA") for note in comments))
+        self.assertIn("UM ARAG TB180 RND", comments)
+
+    def test_reset_clears_current_package(self):
+        result = app.api_reset()
+        self.assertTrue(result["cleared"])
+        self.assertIsNone(app.CURRENT_PACKAGE)
 
     def test_preserves_other_zip_payloads(self):
         current = app.CURRENT_PACKAGE

@@ -1,0 +1,278 @@
+{
+  "catalogue_version": "Snapshot pubblico verificato il 09/10/2026",
+  "note": "Catalogo iniziale per prototipo. Codici e specifiche sono esempi pubblici; non costituiscono matrice completa di compatibilità né sostituiscono schede tecniche, installazione e calibrazione del costruttore.",
+  "products": [
+    {
+      "category": "controller",
+      "code": "4675204",
+      "name": "Delta 70T IBX",
+      "short": "Terminale ISOBUS per centraline ARAG IBX",
+      "specs": "GPS/NAV, UT e Task Controller (TC-SC, TC-GEO, TC-BAS); connessione Only ARAG IBX.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": true,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675202",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS GPS + UT + Task Controller",
+      "specs": "GPS/NAV, UT e Task Controller TC-SC/TC-GEO/TC-BAS; variante ISOBUS non IBX-only.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4674L0701",
+      "name": "Bravo 400S LT",
+      "short": "Computer irroratrice · 7 sezioni",
+      "specs": "Rate controller con navigatore integrato; 7 sezioni, senza funzioni idrauliche nella variante 0701.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115653",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": 7
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4674L0713",
+      "name": "Bravo 400S LT",
+      "short": "Computer irroratrice · 7 sezioni + 7 funzioni idrauliche",
+      "specs": "Rate controller con navigatore integrato; 7 sezioni e 7 funzioni idrauliche.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=115653",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": 7
+      }
+    },
+    {
+      "category": "rate_control",
+      "code": "4679013",
+      "name": "IBX100 ISOBUS Flowtron",
+      "short": "Controllo PWM e gestione dell'irroratrice",
+      "specs": "Centralina Flowtron ISOBUS; la scheda ufficiale cita chiusura ugello per ugello, rateo variabile e raccolta dei dati di lavoro.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=141907",
+      "capabilities": {
+        "pwm": true,
+        "variable_rate": true,
+        "nozzle_by_nozzle": true
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462031",
+      "name": "Orion 3",
+      "short": "Flussimetro elettromagnetico · 1–40 L/min",
+      "specs": "Campo di portata dichiarato 1–40 L/min; la famiglia è presentata per distribuzione di fertilizzante liquido/seminatrici. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 1,
+        "range_max_l_min": 40
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462032",
+      "name": "Orion 3",
+      "short": "Flussimetro elettromagnetico · 2–80 L/min",
+      "specs": "Campo di portata dichiarato 2–80 L/min; dato di misura, NON portata disponibile dell'intero impianto irrorante. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 2,
+        "range_max_l_min": 80
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "462034",
+      "name": "Orion 3 high-flow",
+      "short": "Flussimetro elettromagnetico · 5,5–220 L/min",
+      "specs": "Campo di portata dichiarato 5,5–220 L/min; la compatibilità applicativa va verificata per l'impianto specifico. ARAG lo descrive per sistemi di distribuzione di liquidi su seminatrici: l’uso su irroratrice va confermato.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "range_min_l_min": 5.5,
+        "range_max_l_min": 220
+      }
+    },
+    {
+      "category": "valve",
+      "code": "853T04A55",
+      "name": "Valvola a sfera elettrica 853",
+      "short": "2 vie · raccordo filettato G 1 1/4\"",
+      "specs": "Portata nominale dichiarata 290 L/min a Δp 0,5 bar; 12 bar max; alimentazione 12 Vdc. La portata della valvola non equivale alla capacità di irrorazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=126532",
+      "capabilities": {
+        "nominal_flow_l_min": 290,
+        "max_pressure_bar": 12,
+        "ways": 2
+      }
+    },
+    {
+      "category": "actuator",
+      "code": "4063T95A0",
+      "name": "SELETRON · portaugello quadruplo",
+      "short": "Gruppo con valvola SELETRON · 12 V",
+      "specs": "Portaugello quadruplo con doppia valvola SELETRON; controllo CAN-Bus della valvola e stato. Pressione max dichiarata 8 bar nella famiglia mostrata.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=97807",
+      "capabilities": {
+        "selective_nozzle_control": true,
+        "max_pressure_bar": 8
+      }
+    },
+    {
+      "category": "pump",
+      "code": "97055201",
+      "name": "Pompa MSP400",
+      "short": "Pompa a più giranti · comando elettromagnetico",
+      "specs": "Scheda prodotto: 567 L/min e 11 bar max nelle condizioni dichiarate. Valore nominale della pompa, non portata garantita agli ugelli installati.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=122028",
+      "capabilities": {
+        "nominal_flow_l_min": 567,
+        "max_pressure_bar": 11
+      }
+    },
+    {
+      "category": "filter",
+      "code": "42433135",
+      "name": "Filtro cilindrico per portaugello",
+      "short": "80 mesh",
+      "specs": "Accessorio filtrante; scegliere la maglia compatibile con ugello, formulato e prescrizioni del costruttore.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100357",
+      "capabilities": {
+        "mesh": 80
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "AFC11002",
+      "name": "ASJ / ARAG · ugello antideriva AFC 110",
+      "short": "Ugello a ventaglio antideriva · codice AFC11002",
+      "specs": "Codice pubblicato nel catalogo ASJ/ARAG. La portata va letta dalla curva tecnica alla pressione effettiva e verificata per l'impiego scelto.",
+      "official_url": "https://asjnozzle.it/en/product/fan-low-drift-nozzles-afc-80-110/",
+      "capabilities": {
+        "low_drift": true,
+        "pwm_compatibility": null
+      }
+    },
+    {
+      "category": "nozzle",
+      "code": "WRC11002",
+      "name": "ASJ / ARAG · ugello a ventaglio WRC 110",
+      "short": "Ugello standard a ventaglio · codice WRC11002",
+      "specs": "Codice pubblicato nel catalogo ASJ/ARAG; curva di portata e impiego vanno verificati nella scheda tecnica.",
+      "official_url": "https://asjnozzle.it/en/product/fan-nozzles-traditional-wrc/",
+      "capabilities": {
+        "low_drift": false,
+        "pwm_compatibility": null
+      }
+    },
+    {
+      "category": "nozzle_holder",
+      "code": "002750B",
+      "name": "Portaugello a farfalla con ugello ceramico",
+      "short": "Gruppo ugello / portaugello ARAG",
+      "specs": "Codice articolo pubblicato dal catalogo ARAG; la portata dipende dalla specifica punta montata e dalla pressione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=101089",
+      "capabilities": {
+        "nozzle_flow_known": false
+      }
+    },
+    {
+      "category": "filter",
+      "code": "4243313",
+      "name": "Filtro cilindrico per portaugello",
+      "short": "50 mesh",
+      "specs": "Accessorio filtrante da 50 mesh; verificare compatibilità con ugello e prodotto.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=100357",
+      "capabilities": {
+        "mesh": 50
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675200",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS · GPS/NAV",
+      "specs": "Terminale virtuale ISOBUS con GPS/NAV; le funzioni Task Controller non sono incluse in questa variante.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675203",
+      "name": "Delta 70T ISOBUS",
+      "short": "Terminale ISOBUS · UT",
+      "specs": "Variante Universal Terminal (UT); le funzioni di Task Controller non sono incluse in questa variante.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=110536",
+      "capabilities": {
+        "task_controller": false,
+        "ibx_only": false,
+        "sections": null
+      }
+    },
+    {
+      "category": "controller",
+      "code": "4675304",
+      "name": "Delta 80T IBX",
+      "short": "Terminale GPS/NAV + UT + Task Controller · IBX",
+      "specs": "Terminale progettato per macchine con unità di controllo ARAG IBX; confermare hardware e software della specifica installazione.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?SEC=296&controlKey=&goTo=1",
+      "capabilities": {
+        "task_controller": true,
+        "ibx_only": true,
+        "sections": null
+      }
+    },
+    {
+      "category": "ecu",
+      "code": "4679900",
+      "name": "IBX50 Sprayer",
+      "short": "Centralina di controllo per irroratrice",
+      "specs": "Centralina pensata per l'integrazione con monitor Delta 70T IBX / Delta 80T IBX. Non equivale automaticamente alla centralina Flowtron IBX100.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142857",
+      "capabilities": {
+        "ibx_only": true,
+        "pwm": false
+      }
+    },
+    {
+      "category": "flowmeter",
+      "code": "46211P40000",
+      "name": "ORION 2+",
+      "short": "Flussimetro elettromagnetico · 2–200 L/min",
+      "specs": "Scheda ARAG: range 2–200 L/min, pressione massima 40 bar e caduta di pressione 0,4 bar. ARAG cita ORION 2+ anche in gruppi di comando per atomizzatori. Il range di misura non è la portata realmente disponibile agli ugelli.",
+      "official_url": "https://www.aragnet.com/EN/INT/246/products/?PRD=142638",
+      "capabilities": {
+        "range_min_l_min": 2,
+        "range_max_l_min": 200,
+        "max_pressure_bar": 40,
+        "application": "sprayer-compatible-family-to-confirm"
+      }
+    }
+  ],
+  "categories": {
+    "controller": "Terminale / computer",
+    "rate_control": "Controllo rateo / PWM",
+    "flowmeter": "Flussimetro / sensore",
+    "valve": "Valvola",
+    "actuator": "Attuatore / portaugello selettivo",
+    "pump": "Pompa",
+    "filter": "Filtro",
+    "nozzle": "Ugello",
+    "nozzle_holder": "Portaugello",
+    "ecu": "Centralina / ECU irroratrice"
+  }
+}

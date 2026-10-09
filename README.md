@@ -1,134 +1,85 @@
 # Ultimo Metro — demo hackathon
 
-Web app locale per dimostrare il flusso **FMIS/xFarm → lettura ISOXML → verifica hardware/meteo → pacchetto annotato**.
+Web app locale per dimostrare il flusso **FMIS/xFarm → importazione ISOXML → pre-flight rispetto al profilo macchina e ai codici hardware ARAG → export annotato**.
 
-> **Stato del prototipo.** È un proof of concept da hackathon, non un sistema agronomico o un exporter certificato per terminali reali. L'esportazione aggiunge un commento ISOXML standard (`CAN`) alle operazioni: conserva i valori target `PDV`, le mappe `GRD` e gli altri file binari originali. Non modifica automaticamente la dose, la griglia di prescrizione o i comandi del controller.
+> **Stato del prototipo.** Proof of concept da hackathon, non un sistema agronomico certificato né un exporter validato per terminali reali. Il programma legge gli elementi XML riconosciuti, calcola una stima idraulica e conserva il file originale: non riscrive le dosi `PDV` e non decodifica le celle binarie `GRD`. L'output è un pacchetto ISOXML annotato con commenti di pre-flight, non ancora una prescrizione garantita come eseguibile da una macchina ARAG.
 
 ## Avvio rapido su Windows
 
-1. Installa **Python 3.10 o successivo** da <https://www.python.org/downloads/>. Se il programma di installazione propone l'opzione **Add Python to PATH**, selezionala.
-2. Estrai tutta la cartella `ultimo_metro_demo` in una posizione facile da trovare.
-3. Fai doppio clic su `run_windows.bat`.
-4. Si aprirà il browser all'indirizzo <http://127.0.0.1:5000>. La dashboard carica inizialmente un file sintetico di esempio.
-5. Per fermare il server, torna alla finestra nera aperta da `run_windows.bat` e premi **Ctrl+C**.
+1. Installa **Python 3.10 o successivo** da <https://www.python.org/downloads/>. Se il programma di installazione propone **Add Python to PATH**, selezionalo.
+2. Estrai l'archivio ZIP e conserva tutta la cartella `ultimo_metro_demo`.
+3. Fai doppio clic su `run_windows.bat`. Si aprirà il browser all'indirizzo <http://127.0.0.1:5000>.
+4. La dashboard parte vuota. Premi **Prova con il file demo** oppure carica un file `.zip` / `.isoxml` esportato da xFarm o il `TASKDATA.XML` singolo.
+5. Per rimuovere l'analisi corrente, premi **Rimuovi e ricomincia**. Per sostituire il file senza perdere il profilo macchina, premi **Sostituisci file** oppure seleziona un nuovo file nell'area di upload. Il pulsante demo ricarica i dati sintetici.
+6. Per fermare il server, torna alla finestra del terminale e premi **Ctrl+C**.
 
-Il server usa solamente la libreria standard Python: non è necessario installare Flask, Node.js o altre dipendenze.
+Il server usa solo la libreria standard di Python: non servono Flask, Node.js o un database.
 
 ## Avvio su Linux / Ubuntu
 
-Da un terminale nella cartella del progetto:
+Da terminale nella cartella del progetto:
 
 ```bash
 chmod +x run_linux.sh
 ./run_linux.sh
 ```
 
-Poi apri <http://127.0.0.1:5000> nel browser e usa `Ctrl+C` per fermare il server.
+Apri <http://127.0.0.1:5000>. Per fermare il server premi `Ctrl+C`.
 
 ## Come provare la demo
 
-1. **Parti dal file demo** già caricato nella dashboard. Contiene una coltura dimostrativa, una superficie di 18,6 ha, due zone TZN e due prodotti con nomi esplicitamente dimostrativi.
-2. Modifica capacità del serbatoio, larghezza, portata, velocità e dose target. Il pre-flight viene aggiornato dopo una breve pausa dai cambiamenti dell'interfaccia (debouncing di 300 ms).
-3. Cambia vento, temperatura e ore alla pioggia per vedere il semaforo operativo. Le soglie sono illustrative, non normative e non associate a uno specifico prodotto.
-4. Usa **Meteo live** per interrogare Open-Meteo alle coordinate del campo se la connessione Internet è disponibile. Il dato è una previsione indicativa: verificare sempre sul campo e con le istruzioni del prodotto. Se Internet non è disponibile, usare gli input manuali.
-5. Premi **Esporta ISOXML annotato**. Verrà scaricato un file ZIP che mantiene i contenuti originali e aggiunge due commenti liberi `CAN` standard ai task: uno con serbatoio, intervallo velocità e famiglia di controller, uno con il semaforo e i parametri meteo impostati.
-6. Per provare un file reale, usa l'area di upload e scegli il pacchetto ISOXML esportato dal FMIS (normalmente un archivio `.zip` con `TASKDATA.XML` e possibili file accessori) oppure direttamente `TASKDATA.XML`.
+1. Premi **Prova con il file demo**: il pacchetto sintetico contiene un campo da 18,6 ha e due zone `TZN`, con target 250 e 180 L/ha letti da `PDV` e `VPN`.
+2. Nel pannello **Setup macchina** seleziona i codici dei componenti effettivamente presenti. Il catalogo include esempi di terminali, ECU, controllo PWM, flussimetri, valvole, attuatori/portaugelli selettivi, pompe, ugelli e filtri.
+3. La demo usa un profilo macchina di esempio (serbatoio, larghezza, portata utile calibrata e velocità min/max). Questi dati non si deducono in modo univoco dai soli codici dei componenti. Sono nascosti in **Parametri profilo** per rappresentare dati salvati una volta per macchina, non inseriti per ogni trattamento.
+4. Con i default: 250 L/ha su 18 m a 10 km/h richiede 75 L/min. Il profilo usa 60 L/min, quindi il limite teorico è 8 km/h; la fascia da 250 L/ha diventa gialla. A 180 L/ha la velocità massima teorica è circa 11,1 km/h, per cui la fascia è verde. È una stima, non una misurazione della deposizione.
+5. Modifica vento, temperatura o tempo alla pioggia: il semaforo meteo si aggiorna con soglie illustrative, non normative. Se Internet è disponibile e il file contiene coordinate, **Meteo live** richiama Open-Meteo.
+6. Premi **Esporta ISOXML annotato**. Il pacchetto ZIP conserva `TASKDATA.XML` e i file accessori e aggiunge annotazioni `CAN` con sintesi hardware e meteo. I valori target originali sono preservati.
 
-## Aprirlo e modificarlo con Visual Studio Code
+### Come leggere la mappa
+
+- Il confine viene disegnato dai punti `PNT` nella prima geometria poligonale valida sotto `PFD → PLN → LSG`, quando presente.
+- La tinta verde/gialla/rossa rappresenta la fattibilità idraulica teorica dei ratei che il parser riconosce, a fronte del profilo macchina configurato.
+- Gli elementi `TZN` identificano zone/valori ma non forniscono sempre la loro geometria spaziale; la demo le visualizza come fasce schematiche. Se il pacchetto contiene `GRD`, la demo lo preserva ma non ne decodifica ancora le celle. Quindi **il colore non va interpretato come una ricostruzione geografica reale della prescrizione**.
+
+## Modificare il codice con Visual Studio Code
 
 1. Installa VS Code: <https://code.visualstudio.com/>.
-2. In VS Code scegli **File → Open Folder…** e seleziona `ultimo_metro_demo`.
-3. I file principali sono:
-   - `app.py`: server HTTP, upload, parsing e creazione del pacchetto ZIP.
-   - `static/index.html`: struttura dell'interfaccia.
-   - `static/styles.css`: colori, spaziature e layout responsive.
-   - `static/app.js`: interazioni, rendering dei dati, debouncing e calcoli pre-flight.
-   - `examples/TASKDATA_demo.zip`: pacchetto sintetico caricato dalla demo.
-4. Dopo aver modificato un file, aggiorna il browser con `Ctrl+R`. Se modifichi `app.py`, ferma il server con `Ctrl+C` e avvia di nuovo il `.bat` o lo script `.sh`.
+2. In VS Code scegli **File → Open Folder…** e seleziona la cartella `ultimo_metro_demo` estratta dallo ZIP.
+3. Modifica il file pertinente nella lista seguente.
+4. Per modifiche a HTML, CSS, JavaScript o JSON: salva (`Ctrl+S`) e aggiorna il browser. Se non vedi le modifiche, usa `Ctrl+F5` per ricaricare senza cache.
+5. Per modifiche a `app.py`: ferma il server con `Ctrl+C` e rilancia `run_windows.bat` o `./run_linux.sh`.
+6. Per verificare la demo dal terminale, apri VS Code → **Terminal → New Terminal** e lancia:
 
-## Cosa interpreta e cosa no
+```bash
+python -m unittest discover -s tests -v
+node --check static/app.js
+python -m json.tool static/arag_catalog.json
+```
 
-- Riconosce il contenitore `ISO11783_TaskData`, i metadati di versione/FMIS e i principali elementi `TSK`, `PFD`, `PDT`, `CTP`, `DVC`, `TZN`, `PDV`, `VPN`, `GRD`, `TLG` e `PNT`.
-- Per i `PDV` che referenziano un `VPN`, mostra il valore visualizzato usando `valore × scale + offset` e l'unità dichiarata in `VPN.E`.
-- Usa `PFD.D` come superficie in metri quadrati per ricavare gli ettari; legge le coordinate `PNT` per l'anteprima del confine.
-- Calcola un limite teorico della velocità attraverso la relazione `L/ha = 600 × portata (L/min) / [velocità (km/h) × larghezza (m)]`.
-- Non decodifica le celle binarie dei file GRD, non valida l'intero XSD ISOXML, non verifica etichette fitosanitarie o compatibilità delle miscele, e non prova il risultato su Bravo/ISOBUS.
-- Le zone colorate della mappa sono una rappresentazione illustrativa; non sostituiscono una mappa di prescrizione ricostruita dai dati binari.
-- La stima dei litri su una mappa variabile usa prudenzialmente la dose massima su tutta la superficie e **non** equivale al consumo reale della mappa.
+### File da conoscere
+
+| File | A cosa serve | Esempio di modifica |
+|---|---|---|
+| `static/index.html` | Struttura e testi della pagina | Rinominare una sezione o aggiungere un input |
+| `static/styles.css` | Grafica, colori, responsive layout | Modificare verde/giallo/rosso, spazi e font |
+| `static/app.js` | Logica nel browser: upload, debounce, mappa, stime, meteo e selettori | Cambiare una regola di classificazione o il comportamento dei pulsanti |
+| `app.py` | Server locale, parser XML, stato della sessione, reset, export ZIP e commenti `CAN` | Aggiungere un campo al riepilogo estratto da ISOXML |
+| `static/arag_catalog.json` | Catalogo dei codici hardware pubblici | Inserire un nuovo codice con categoria, descrizione, capacità note e URL ufficiale |
+| `examples/TASKDATA_demo.xml` | Dati XML sintetici leggibili | Cambiare nome del campo o ratei demo |
+| `examples/TASKDATA_demo.zip` | Pacchetto sintetico usato dal bottone demo | Va rigenerato se cambia l'XML d'esempio |
+| `tests/test_core.py` | Test automatici del parser/export/reset | Aggiungere un test per una nuova regola |
+
+Per aggiungere un prodotto al catalogo, apri `static/arag_catalog.json` e inserisci un oggetto in `products` con `category`, `code`, `name`, `short`, `specs`, `official_url` e `capabilities`. Il nome di `category` deve corrispondere a una categoria con selettore `data-catalog-category` in `static/index.html`. Non stimare dati tecnici che non compaiono nella scheda ufficiale: lascia `null` o indica “da verificare”.
+
+## Ricerca di mercato
+
+Consulta [RICERCA_MERCATO.md](RICERCA_MERCATO.md), con portfolio Nordson/ARAG, esempi di codici ufficiali, sovrapposizione funzionale con xFarm, differenziazione proposta e domande per i mentor.
 
 ## Limiti e sicurezza
 
-- Il server ascolta solo su `127.0.0.1`: è pensato per una demo sul computer locale. Non metterlo direttamente su Internet.
-- Il file caricato viene elaborato in memoria dal server locale; non viene inviato a xFarm o ad ARAG. Il pulsante **Meteo live** effettua una richiesta separata a Open-Meteo usando le coordinate lette dal file.
-- Il pacchetto demo è sintetico e non deve essere caricato su una macchina operativa.
-- Prima di usare file prodotti su un computer reale, convalidare la specifica versione ISOXML, i DDI, il valore fisico delle unità e il formato richiesto dal terminale/controller specifico. In caso di hackathon dichiarare chiaramente questa limitazione.
-
-# Guida rapida per la demo live
-
-## Prima di iniziare
-
-- Avvia `run_windows.bat` e lascia aperta la finestra del server.
-- Apri `http://127.0.0.1:5000` (la demo carica automaticamente il file sintetico).
-- Se vuoi mostrare un file vero di xFarm, caricalo dalla prima scheda; conserva sempre una copia originale del file per confronto.
-
-## Scaletta da 2–3 minuti
-
-### 1. Import — “non partiamo da un foglio vuoto”
-
-Mostra il file `TASKDATA_demo.zip`. La dashboard indica una operazione, un campo da 18,6 ha, due prodotti descrittivi e due zone. I valori 250 e 180 L/ha sono interpretati dal `PDV` e dal suo `VPN` nel file sintetico.
-
-Frase suggerita: *“Ultimo Metro non sostituisce il FMIS: importa il piano ISOXML già generato e aggiunge una verifica sull'attrezzatura che eseguirà davvero il lavoro.”*
-
-### 2. Hardware — fai emergere un problema concreto
-
-Lascia i valori di esempio:
-
-- volume target massimo: 250 L/ha
-- larghezza barra: 18 m
-- portata totale disponibile: 60 L/min
-- velocità massima impostata: 10 km/h
-
-A 10 km/h servirebbero teoricamente 75 L/min. Con 60 L/min, il limite teorico è 8 km/h. La demo mostra un avviso e non abbassa autonomamente la dose.
-
-Frase suggerita: *“Non correggiamo una dose agronomica facendo sparire il problema: rendiamo visibile che l'hardware non è in grado di eseguire il piano alla velocità scelta e proponiamo una verifica di velocità o ugelli.”*
-
-Puoi cambiare la portata totale a 90 L/min e mostrare come il controllo si aggiorna dopo una breve pausa: è il **debouncing** della UI, che evita di ricalcolare ad ogni singolo evento mentre si sta digitando.
-
-### 3. Meteo — mostra il ruolo dell'operatore
-
-Inserisci vento a 16 km/h, oppure pioggia tra un'ora: il semaforo diventa rosso secondo le **soglie illustrative configurate nella demo**. Poi ripristina valori più favorevoli. Se la connessione Internet è disponibile e il campo contiene coordinate, premi `Meteo live` per richiamare Open-Meteo.
-
-Frase suggerita: *“Il dato meteo da solo non è una prescrizione: è un segnale da contestualizzare con prodotto, etichetta, ugello e condizioni locali.”*
-
-### 4. Export — dimostra il collegamento di ritorno
-
-Premi `Esporta ISOXML annotato`. Il file scaricato è un ZIP. Aprendolo con un archiviatore, dentro trovi `TASKDATA.XML`. In ogni task la demo aggiunge due commenti `CAN` con:
-
-- serbatoio, intervallo di velocità e famiglia di controller selezionata;
-- semaforo meteo e i valori inseriti per vento, temperatura e pioggia.
-
-Confrontando il file esportato con quello originale, i `PDV` e i file accessori, se presenti, restano invariati.
-
-Frase suggerita: *“Questo prototipo chiude il pre-flight con una nota interoperabile nel task; la prossima iterazione dovrà produrre e convalidare i cambiamenti realmente eseguibili dal controller ARAG specifico.”*
-
-## Domande che la giuria potrebbe fare
-
-**“L'export comanda davvero il Bravo 400S?”**
-
-Risposta trasparente: *“Non ancora. La demo importa il pacchetto, fa i controlli e aggiunge commenti ISOXML; non afferma di impostare la macchina né di essere validata su un terminale reale. Per quel passaggio serve verificare il formato supportato dal singolo controller e provarlo con hardware.”*
-
-**“Perché non abbassate la dose se la portata non basta?”**
-
-*“Perché la dose è una decisione agronomica vincolata all'etichetta, non un parametro da ridurre per compensare un limite della macchina. Il sistema segnala il problema e propone di verificare velocità, ugelli, portata o fattibilità con il tecnico.”*
-
-**“Dove sono satellite e AI?”**
-
-*“Sono moduli successivi: questo primo prototipo è concentrato sul ponte ISOXML–macchina. La mappa del campo viene dal file quando sono presenti coordinate; la griglia binaria di prescrizione non viene ancora ricostruita. Per dichiarare una riduzione dei fitofarmaci servono dati satellitari/scouting reali, regole agronomiche approvate e test comparativi.”*
-
-## Evoluzione consigliata dopo l'hackathon
-
-1. Validare un vero export xFarm e versioni ISOXML v3/v4 con XSD e pacchetti che contengano GRD/TLG.
-2. Verificare con ARAG il formato di prescrizione accettato dal modello di terminale/controller e fare un test in ambiente controllato.
-3. Interpretare le mappe GRD binarie e gli eventuali log di esecuzione prima di introdurre modifiche alle rate.
-4. Collegare un database nazionale aggiornato delle etichette, incluse dose min/max, coltura, avversità e compatibilità miscela, con conferma del tecnico.
-5. Integrare scouting/satellite/meteo per raccomandazioni agronomiche solo con fonti tracciabili e validazione sul campo.
+- Il server ascolta solo su `127.0.0.1`: è una demo per uso locale, non esporlo direttamente a Internet.
+- Il file è elaborato in memoria sul computer dell'utente; non viene inviato ad ARAG o a xFarm. Il pulsante **Meteo live** fa una richiesta separata a Open-Meteo con il centroide delle coordinate del campo.
+- I codici nel catalogo sono esempi basati su schede pubbliche. La loro presenza nel menu non dimostra che una combinazione sia compatibile come sistema completo. Orion 3, ad esempio, viene descritto da ARAG per sistemi di distribuzione liquidi su seminatrici: l'idoneità per una specifica irroratrice va confermata.
+- Range di un flussimetro e portata nominale di pompa/valvola non equivalgono alla portata effettiva agli ugelli: servono schema idraulico e calibrazione.
+- La demo non decodifica griglie binarie `GRD`, non valida l'intero XSD ISOXML, non verifica le etichette fitosanitarie né le compatibilità di miscela e non ha accesso diretto a computer ARAG.
+- Non usare il file sintetico su una macchina reale. Prima di inviare un export operativo occorre confermare il supporto al modello/firmware specifico con ARAG e provarlo in ambiente controllato.

@@ -74,7 +74,7 @@
           <div class="upload-divider"><span>OPPURE</span></div>
           <button id="loadDemoBtn" class="demo-file-button" type="button"><span class="demo-file-icon">▤</span><span><strong>Prova con il file demo</strong><small>Pomodoro · 18,6 ha · 2 zone di prescrizione</small></span><span class="arrow-right">→</span></button>
         </div>
-        <div class="loaded-file-bar hidden" id="loadedFileBar"><span class="file-badge">XML</span><div class="loaded-file-copy"><strong id="loadedFileName">TASKDATA.XML</strong><small id="loadedFileMeta">Pacchetto letto</small></div><span class="loaded-success"><span>✓</span> IMPORTATO</span><button type="button" id="resetBtn" class="text-button">Sostituisci file</button></div>
+        <div class="loaded-file-bar hidden" id="loadedFileBar"><span class="file-badge">XML</span><div class="loaded-file-copy"><strong id="loadedFileName">TASKDATA.XML</strong><small id="loadedFileMeta">Pacchetto letto</small></div><span class="loaded-success"><span>✓</span> IMPORTATO</span><button type="button" id="resetBtn" class="text-button">Sostituisci file</button><button type="button" id="clearBtn" class="danger-text-button">Rimuovi e ricomincia</button></div>
       </section>
 
       <div id="workspace" class="hidden">
@@ -91,7 +91,7 @@
               <div class="panel-heading"><div><div class="section-kicker">CONTESTO DEL CAMPO</div><h2>Area di lavoro</h2></div><span class="small-chip" id="fieldCropChip">Coltura</span></div>
               <div class="field-summary"><div><span class="field-name" id="fieldName">Campo importato</span><span class="field-sub" id="fieldSub">Dati letti dal TASKDATA</span></div><div class="field-area"><strong id="fieldArea">—</strong><span>ettari</span></div></div>
               <div class="map-frame">
-                <div class="map-topline"><span><span class="map-pin">⌖</span> Geometria da ISOXML</span><span class="map-scale">ANTEPRIMA</span></div>
+                <div class="map-topline"><span><span class="map-pin">⌖</span> Confine del campo + compatibilità per zona</span><span class="map-scale" id="mapModeTag">ANTEPRIMA</span></div>
                 <svg id="fieldMap" class="field-map" viewBox="0 0 540 245" role="img" aria-label="Anteprima schematica del campo">
                   <defs><pattern id="gridPattern" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 22 0 L 0 0 0 22" fill="none" stroke="#d8e4db" stroke-width="0.7"/></pattern></defs>
                   <rect width="540" height="245" fill="#f3f7f2"/><rect width="540" height="245" fill="url(#gridPattern)"/>
@@ -103,8 +103,8 @@
                   <text x="331" y="112" class="map-zone-label">ZONA B</text><text x="331" y="128" class="map-zone-sub">schema di lavoro</text>
                   <g transform="translate(20 18)"><rect width="116" height="25" rx="6" fill="#fff" stroke="#dce6de"/><circle cx="12" cy="12.5" r="3.3" fill="#42784c"/><text x="22" y="16" class="map-tag">FIELD PREVIEW</text></g>
                 </svg>
-                <div class="map-legend"><span><i class="legend-swatch strong"></i> Confine campo dal file</span><span><i class="legend-swatch medium"></i> Retino illustrativo</span></div>
-                <div class="map-note"><span>ⓘ</span> Il confine deriva dalle coordinate ISOXML; retino e zone colorate restano illustrativi finché la prescrizione spaziale non viene decodificata.</div>
+                <div class="map-legend"><span><i class="legend-swatch coverage-good"></i> Verde · margine sufficiente</span><span><i class="legend-swatch coverage-warn"></i> Giallo · velocità da ridurre</span><span><i class="legend-swatch coverage-bad"></i> Rosso · non fattibile nel profilo</span></div>
+                <div class="map-note" id="mapNote"><span>ⓘ</span> Il contorno viene letto da ISOXML quando presente. Le zone colorate sono una stima dimostrativa della capacità, non una mappa di irrorazione realmente eseguita.</div>
               </div>
               <div class="field-footer"><div><span class="footer-label">ORIGINE DATI</span><strong id="sourceSoftware">FMIS non indicato</strong></div><div><span class="footer-label">VERSIONE</span><strong id="isoVersion">ISOXML —</strong></div><div><span class="footer-label">FILE IN PACCHETTO</span><strong id="packageFiles">—</strong></div></div>
             </article>
@@ -138,18 +138,35 @@
 
             <article class="panel hardware-panel" id="hardware">
               <div class="panel-heading"><div><div class="section-kicker">COMPATIBILITÀ ATTREZZATURA</div><h2>Setup macchina</h2></div><span class="small-chip arag-chip"><span class="arag-mark">A</span> ARAG-ready concept</span></div>
-              <p class="panel-intro">Inserisci l'hardware effettivo installato su trattore e irroratrice. La demo verifica la fattibilità idraulica con una formula semplificata.</p>
-              <div class="hardware-grid">
-                <label class="field-control wide"><span>Computer / controller</span><select id="controller"><option value="Bravo 400S">ARAG Bravo 400S</option><option value="Bravo 180S">ARAG Bravo 180S</option><option value="ISOBUS TC">ISOBUS Task Controller</option><option value="unknown">Altro / non specificato</option></select></label>
-                <label class="field-control"><span>Serbatoio</span><div class="input-unit"><input id="tank" type="number" min="100" max="50000" step="50" value="1200"><em>L</em></div></label>
-                <label class="field-control"><span>Larghezza barra</span><div class="input-unit"><input id="width" type="number" min="1" max="60" step="0.5" value="18"><em>m</em></div></label>
-                <label class="field-control"><span>Portata totale disponibile</span><div class="input-unit"><input id="flow" type="number" min="1" max="2000" step="1" value="60"><em>L/min</em></div></label>
-                <label class="field-control"><span>Velocità min.</span><div class="input-unit"><input id="speedMin" type="number" min="1" max="30" step="0.5" value="5"><em>km/h</em></div></label>
-                <label class="field-control"><span>Velocità max.</span><div class="input-unit"><input id="speedMax" type="number" min="1" max="30" step="0.5" value="10"><em>km/h</em></div></label>
-                <label class="field-control"><span>Volume target</span><div class="input-unit"><input id="targetRate" type="number" min="1" max="5000" step="5" value="250"><em>L/ha</em></div><small id="targetRateSource">Valore demo inserito manualmente</small></label>
+              <p class="panel-intro">Seleziona i codici realmente montati sulla macchina. L'app usa le specifiche pubbliche disponibili e un profilo macchina salvato una volta; se un dato non si può dedurre dal codice, lo segnala invece di inventarlo.</p>
+              <div class="catalog-status"><span class="catalog-status-dot"></span><span>Catalogo iniziale da schede pubbliche Nordson Precision Agriculture / ARAG / ASJ.</span><a href="/static/arag_catalog.json" target="_blank" rel="noopener">Apri catalogo dati ↗</a></div>
+              <div class="hardware-catalog-grid">
+                <label class="field-control wide"><span>Terminale / computer</span><select id="controllerCode" data-catalog-category="controller"><option value="4675204">4675204 · Delta 70T IBX</option></select></label>
+                <label class="field-control wide"><span>Controllo rateo / PWM</span><select id="rateControlCode" data-catalog-category="rate_control"><option value="4679013">4679013 · IBX100 ISOBUS Flowtron</option></select></label>
+                <label class="field-control wide"><span>Centralina / ECU irroratrice (se separata)</span><select id="ecuCode" data-catalog-category="ecu"><option value="">Non dichiarata / integrata</option></select></label>
+                <label class="field-control"><span>Flussimetro / sensore</span><select id="flowmeterCode" data-catalog-category="flowmeter"><option value="46211P40000">46211P40000 · ORION 2+ 2–200 L/min</option></select></label>
+                <label class="field-control"><span>Valvola</span><select id="valveCode" data-catalog-category="valve"><option value="853T04A55">853T04A55 · valvola 853</option></select></label>
+                <label class="field-control"><span>Attuatore / portaugello selettivo</span><select id="actuatorCode" data-catalog-category="actuator"><option value="4063T95A0">4063T95A0 · SELETRON</option></select></label>
+                <label class="field-control"><span>Pompa</span><select id="pumpCode" data-catalog-category="pump"><option value="97055201">97055201 · MSP400</option></select></label>
+                <label class="field-control"><span>Ugello</span><select id="nozzleCode" data-catalog-category="nozzle"><option value="AFC11002">AFC11002 · ASJ/ARAG antideriva</option></select></label>
+                <label class="field-control"><span>Portaugello</span><select id="nozzleHolderCode" data-catalog-category="nozzle_holder"><option value="002750B">002750B · portaugello ARAG</option></select></label>
+                <label class="field-control"><span>Filtro</span><select id="filterCode" data-catalog-category="filter"><option value="42433135">42433135 · filtro 80 mesh</option></select></label>
               </div>
-              <div class="flow-formula"><span class="formula-icon">ƒx</span><span>Volume applicato = <b>600 × portata</b> / (velocità × larghezza)</span><span class="formula-label">L/ha</span></div>
-              <div id="hardwareResult" class="hardware-result"><div class="result-icon">↗</div><div><strong>In attesa dei parametri</strong><small>La capacità effettiva sarà calcolata automaticamente.</small></div></div>
+              <div id="hardwareCatalogResult" class="hardware-catalog-result"><strong>Configurazione ARAG</strong><p>Seleziona i codici installati per vedere specifiche e avvertenze.</p></div>
+              <div class="profile-summary" id="profileSummary"><span class="profile-summary-icon">▦</span><span><b>Profilo macchina demo</b><small>Barra 18 m · serbatoio 1.200 L · portata di riferimento 60 L/min · velocità 5–10 km/h</small></span><button type="button" id="toggleAdvancedBtn" class="quiet-button">Parametri profilo</button></div>
+              <div id="advancedSettings" class="advanced-settings hidden">
+                <p>Questi dati sono proprietà del profilo macchina/demo e possono essere salvati una volta per attrezzatura. Nella versione reale arriverebbero da anagrafica macchina, telemetria o calibrazione.</p>
+                <div class="hardware-grid">
+                  <label class="field-control"><span>Capacità serbatoio</span><div class="input-unit"><input id="tank" type="number" min="100" max="50000" step="50" value="1200"><em>L</em></div></label>
+                  <label class="field-control"><span>Larghezza barra</span><div class="input-unit"><input id="width" type="number" min="1" max="60" step="0.5" value="18"><em>m</em></div></label>
+                  <label class="field-control"><span>Portata utile validata nel profilo</span><div class="input-unit"><input id="flow" type="number" min="1" max="2000" step="1" value="60"><em>L/min</em></div><small>Non deducibile da un solo codice componente.</small></label>
+                  <label class="field-control"><span>Velocità min.</span><div class="input-unit"><input id="speedMin" type="number" min="1" max="30" step="0.5" value="5"><em>km/h</em></div></label>
+                  <label class="field-control"><span>Velocità max.</span><div class="input-unit"><input id="speedMax" type="number" min="1" max="30" step="0.5" value="10"><em>km/h</em></div></label>
+                  <label class="field-control"><span>Volume target di fallback</span><div class="input-unit"><input id="targetRate" type="number" min="1" max="5000" step="5" value="250"><em>L/ha</em></div><small id="targetRateSource">Usato solo se il file non ha una dose leggibile.</small></label>
+                </div>
+                <div class="flow-formula"><span class="formula-icon">ƒx</span><span>Portata richiesta = <b>dose × velocità × larghezza / 600</b>. La dose importata non viene modificata automaticamente.</span></div>
+              </div>
+              <div id="hardwareResult" class="hardware-result"><div class="result-icon">↗</div><div><strong>In attesa dei parametri</strong><small>La capacità teorica sarà calcolata in base al profilo macchina e alle dosi per zona.</small></div></div>
             </article>
           </div>
         </section>

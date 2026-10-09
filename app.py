@@ -134,14 +134,22 @@ def build_summary(files: dict[str, bytes], taskdata_path: str, filename: str, wa
             "crop_ref": crop_ref,
             "points": [],
         }
-        # ISOXML field geometry: PNT C = north/latitude, D = east/longitude.
-        for pnt in node.iter():
-            if local_name(pnt.tag) != "PNT":
-                continue
-            lat = numeric(attr(pnt, "C"), None)
-            lon = numeric(attr(pnt, "D"), None)
-            if lat is not None and lon is not None and -90 <= lat <= 90 and -180 <= lon <= 180:
-                field["points"].append({"lat": lat, "lon": lon})
+        # Geometry preview: prefer the first closed polygon ring found under PLN/LSG.
+        # Do not mix boundary vertices with independent PFD points or guidance lines.
+        candidate_rings: list[list[dict[str, float]]] = []
+        for polygon in descendants(node, "PLN"):
+            for line_string in direct_children(polygon, "LSG"):
+                ring: list[dict[str, float]] = []
+                for pnt in direct_children(line_string, "PNT"):
+                    lat = numeric(attr(pnt, "C"), None)
+                    lon = numeric(attr(pnt, "D"), None)
+                    if lat is not None and lon is not None and -90 <= lat <= 90 and -180 <= lon <= 180:
+                        ring.append({"lat": lat, "lon": lon})
+                if len(ring) >= 3:
+                    candidate_rings.append(ring)
+        if candidate_rings:
+            # A PLN may contain outer/inner rings. For a small preview, use the longest valid ring.
+            field["points"] = max(candidate_rings, key=len)
         fields.append(field)
         if field["id"]:
             fields_by_id[field["id"]] = field
@@ -306,6 +314,13 @@ def api_demo_file() -> dict[str, Any]:
     return {"ok": True, "summary": CURRENT_PACKAGE["summary"]}
 
 
+def api_reset() -> dict[str, bool]:
+    """Forget the currently uploaded package for this local demo session."""
+    global CURRENT_PACKAGE
+    CURRENT_PACKAGE = None
+    return {"ok": True, "cleared": True}
+
+
 def qualified_child_tag(parent: ET.Element, child_name: str) -> str:
     if parent.tag.startswith("{") and "}" in parent.tag:
         return parent.tag.split("}", 1)[0] + "}" + child_name
@@ -319,21 +334,61 @@ def add_or_update_preflight_comments(root: ET.Element, config: dict[str, Any]) -
     tank = int(max(0, min(99999, numeric(config.get("tank_l"), 1200) or 1200)))
     speed_min = numeric(config.get("speed_min"), 5) or 5
     speed_max = numeric(config.get("speed_max"), 10) or 10
-    controller = str(config.get("controller", "")).lower()
-    controller_code = "B400" if "400" in controller else ("B180" if "180" in controller else ("ISOB" if "isobus" in controller else "ALTRO"))
+    controller = str(config.get("controller", "")).strip()
+    controller_product_code = re.sub(r"[^A-Za-z0-9]", "", controller)
+    rate_control_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("rate_control_code", "")))
+    flowmeter_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("flowmeter_code", "")))
+    valve_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("valve_code", "")))
+    actuator_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("actuator_code", "")))
+    pump_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("pump_code", "")))
+    nozzle_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("nozzle_code", "")))
+    filter_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("filter_code", "")))
+    nozzle_holder_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("nozzle_holder_code", "")))
+    ecu_code = re.sub(r"[^A-Za-z0-9]", "", str(config.get("ecu_code", "")))
+    if controller_product_code.startswith("467520"):
+        controller_short = "D70T"
+    elif controller_product_code.startswith("467530"):
+        controller_short = "D80T"
+    elif "400" in controller.lower() or controller_product_code.startswith("4674L07"):
+        controller_short = "B400"
+    elif "180" in controller.lower():
+        controller_short = "B180"
+    elif "isobus" in controller.lower():
+        controller_short = "ISOB"
+    else:
+        controller_short = "ALTRO"
+    # Use a real part code only if the input looks like a code, not a descriptive label.
+    if controller_product_code.isdigit() or controller_product_code.startswith("4674L"):
+        controller_code = controller_product_code[:9]
+    else:
+        controller_code = controller_short
     wind = numeric(config.get("wind_kmh"), None)
     temperature = numeric(config.get("temperature_c"), None)
     rain = numeric(config.get("rain_hours"), None)
-    hardware_note = f"UM HW T{tank}L V{round(speed_min)}-{round(speed_max)} {controller_code}"[:32]
+    hardware_note = f"UM HW T{tank}L V{round(speed_min)}-{round(speed_max)} {controller_short}"[:32]
+    arag_note = f"UM ARAG T{controller_code} R{rate_control_code[:9] or 'ND'}"[:32]
+    flow_valve_note = f"UM FLOW F{flowmeter_code[:11] or 'ND'} V{valve_code[:9] or 'ND'}"[:32]
+    actuator_pump_note = f"UM ACT A{actuator_code[:9] or 'ND'} P{pump_code[:8] or 'ND'}"[:32]
+    nozzle_filter_note = f"UM NOZ N{nozzle_code[:9] or 'ND'} F{filter_code[:8] or 'ND'}"[:32]
+    holder_note = f"UM HOLD {nozzle_holder_code[:20] or 'ND'}"[:32]
+    ecu_note = f"UM ECU {ecu_code[:24] or 'ND'}"[:32]
     wx_values = [f"W{round(wind)}" if wind is not None else "W?",
                  f"T{round(temperature)}" if temperature is not None else "T?",
                  f"R{round(rain)}" if rain is not None else "R?"]
-    weather_note = f"UM WX {weather_code} " + " ".join(wx_values)
-    weather_note = weather_note[:32]
+    weather_note = (f"UM WX {weather_code} " + " ".join(wx_values))[:32]
 
     changed = 0
     for task in tasks:
-        desired = {"UM HW": hardware_note, "UM WX": weather_note}
+        desired = {
+            "UM HW": hardware_note,
+            "UM ARAG": arag_note,
+            "UM FLOW": flow_valve_note,
+            "UM ACT": actuator_pump_note,
+            "UM NOZ": nozzle_filter_note,
+            "UM HOLD": holder_note,
+            "UM ECU": ecu_note,
+            "UM WX": weather_note,
+        }
         for prefix, note in desired.items():
             existing = None
             for child in direct_children(task, "CAN"):
@@ -437,6 +492,10 @@ class DemoHandler(BaseHTTPRequestHandler):
             if route == "/api/demo":
                 self.read_body(100_000)
                 self.send_json(200, api_demo_file())
+                return
+            if route == "/api/reset":
+                self.read_body(100_000)
+                self.send_json(200, api_reset())
                 return
             if route == "/api/import":
                 body = self.read_body()
