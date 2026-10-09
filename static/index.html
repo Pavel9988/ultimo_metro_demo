@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#102b24">
+  <meta name="theme-color" content="#007AC9">
   <title>Ultimo Metro · Pre-flight agricolo</title>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
@@ -19,6 +19,7 @@
         <a class="nav-item active" href="#overview"><span class="nav-icon">◫</span> Panoramica <span class="nav-indicator"></span></a>
         <a class="nav-item" href="#import"><span class="nav-icon">⇧</span> Importa ISOXML</a>
         <a class="nav-item" href="#hardware"><span class="nav-icon">⌁</span> Setup macchina</a>
+        <a class="nav-item" href="#labels"><span class="nav-icon">▤</span> Banca dati etichette</a>
         <a class="nav-item" href="#validation"><span class="nav-icon">✓</span> Verifica piano</a>
         <a class="nav-item" href="#export"><span class="nav-icon">⇩</span> Esporta</a>
       </nav>
@@ -29,7 +30,7 @@
         <p>Un ponte operativo tra FMIS, attrezzatura e lavoro eseguito.</p>
         <div class="partner-tags"><span>xFarm</span><span>ARAG</span><span>ISOXML</span></div>
       </div>
-      <div class="sidebar-bottom"><span class="live-dot"></span> Prototipo locale <span class="version">v0.1</span></div>
+      <div class="sidebar-bottom"><span class="live-dot"></span> Prototipo locale <span class="version">v0.3</span></div>
     </aside>
 
     <main class="main-content" id="top">
@@ -58,6 +59,10 @@
       </section>
 
       <div id="globalMessage" class="global-message hidden" role="status"></div>
+      <aside class="network-note" aria-label="Accesso dalla rete locale">
+        <span class="network-note-icon">⌁</span>
+        <div><strong>Condivisione sulla rete locale</strong><p>Per collegare gli amici, aprire l'indirizzo LAN mostrato nel terminale del computer che avvia la demo, ad esempio <code>http://192.168.1.25:5000</code> — non <code>127.0.0.1</code>. La demo usa una sessione condivisa: chi importa un file modifica l'analisi vista dagli altri.</p></div>
+      </aside>
 
       <section class="upload-card panel" id="import">
         <div class="panel-heading upload-heading">
@@ -106,13 +111,31 @@
                 <div class="map-legend"><span><i class="legend-swatch coverage-good"></i> Verde · margine sufficiente</span><span><i class="legend-swatch coverage-warn"></i> Giallo · velocità da ridurre</span><span><i class="legend-swatch coverage-bad"></i> Rosso · non fattibile nel profilo</span></div>
                 <div class="map-note" id="mapNote"><span>ⓘ</span> Il contorno viene letto da ISOXML quando presente. Le zone colorate sono una stima dimostrativa della capacità, non una mappa di irrorazione realmente eseguita.</div>
               </div>
-              <div class="field-footer"><div><span class="footer-label">ORIGINE DATI</span><strong id="sourceSoftware">FMIS non indicato</strong></div><div><span class="footer-label">VERSIONE</span><strong id="isoVersion">ISOXML —</strong></div><div><span class="footer-label">FILE IN PACCHETTO</span><strong id="packageFiles">—</strong></div></div>
+              <div class="field-footer"><div><span class="footer-label">ORIGINE DATI</span><strong id="sourceSoftware">FMIS non indicato</strong></div><div><span class="footer-label">VERSIONE</span><strong id="isoVersion">ISOXML —</strong></div><div><span class="footer-label">FILE IN PACCHETTO</span><strong id="packageFiles">—</strong></div><div><span class="footer-label">DISPOSITIVI DESCRITTI (DVC)</span><strong id="isoDevices">Non indicati</strong></div></div>
             </article>
 
             <article class="panel prescription-panel">
               <div class="panel-heading"><div><div class="section-kicker">PRESCRIZIONE IMPORTATA</div><h2>Zone e valori target</h2></div><span class="small-chip neutral-chip" id="gridStatus">Lettura ISOXML</span></div>
               <div id="zoneList" class="zone-list"><div class="empty-state">Nessuna zona trovata nel file.</div></div>
               <div class="prescription-foot"><span class="info-circle">i</span><span>I valori sono interpretati tramite gli attributi VPN quando disponibili. Le mappe binarie GRD sono conservate nel pacchetto, ma non vengono riscritte da questa demo.</span></div>
+            </article>
+
+            <article class="panel label-panel" id="labels">
+              <div class="panel-heading"><div><div class="section-kicker">CONTROLLO PRODOTTI</div><h2>Banca dati etichette</h2></div><span class="small-chip label-db-chip" id="labelDbStatus">CATALOGO VUOTO</span></div>
+              <p class="panel-intro">I prodotti provengono dal piano ISOXML. Il collegamento alla banca dati delle etichette è separato dalla prescrizione: un nome nel file non dimostra da solo che prodotto, coltura, impiego e dose siano autorizzati.</p>
+              <div class="label-product-select">
+                <label class="field-control"><span>Prodotto da verificare (PDT)</span><select id="labelProductSelect"><option value="">Importa un ISOXML per vedere i prodotti</option></select></label>
+                <div id="labelProductContext" class="label-product-context">In attesa di un prodotto ISOXML.</div>
+              </div>
+              <div id="labelRecordView" class="label-record-view"><div class="label-empty-state"><strong>Nessuna scheda etichetta abbinata</strong><p>Questa demo non interroga ancora una fonte ufficiale e non include etichette fitosanitarie simulate. Le schede locali possono essere aggiunte in <code>static/labels_catalog.json</code>, indicando sempre fonte e data di verifica.</p></div></div>
+              <div class="label-check-grid" id="labelCheckGrid">
+                <div class="label-check-item"><span>01</span><div><strong>Fonte ufficiale e registrazione</strong><small>Da collegare / verificare</small></div></div>
+                <div class="label-check-item"><span>02</span><div><strong>Coltura e impiego autorizzato</strong><small>Da verificare</small></div></div>
+                <div class="label-check-item"><span>03</span><div><strong>Dose e numero di applicazioni</strong><small>Da verificare</small></div></div>
+                <div class="label-check-item"><span>04</span><div><strong>Vincoli meteo, deriva e fasce</strong><small>Da verificare</small></div></div>
+                <div class="label-check-item"><span>05</span><div><strong>Tempi di carenza e rientro</strong><small>Da verificare</small></div></div>
+              </div>
+              <div class="label-disclaimer"><strong>Nota:</strong> finché non viene collegata una fonte autorevole e verificata la scheda esatta, la demo non può dichiarare il trattamento conforme all'etichetta.</div>
             </article>
           </div>
 
@@ -138,7 +161,7 @@
 
             <article class="panel hardware-panel" id="hardware">
               <div class="panel-heading"><div><div class="section-kicker">COMPATIBILITÀ ATTREZZATURA</div><h2>Setup macchina</h2></div><span class="small-chip arag-chip"><span class="arag-mark">A</span> ARAG-ready concept</span></div>
-              <p class="panel-intro">Seleziona i codici realmente montati sulla macchina. L'app usa le specifiche pubbliche disponibili e un profilo macchina salvato una volta; se un dato non si può dedurre dal codice, lo segnala invece di inventarlo.</p>
+              <p class="panel-intro">Seleziona i codici realmente montati sulla macchina. Questa configurazione è indipendente dalla prescrizione: eventuali DVC nell'ISOXML sono solo un riferimento e non sostituiscono la conferma dell'hardware presente. Il cambio di HW aggiorna la fattibilità per zona; i dati mancanti restano da verificare.</p>
               <div class="catalog-status"><span class="catalog-status-dot"></span><span>Catalogo iniziale da schede pubbliche Nordson Precision Agriculture / ARAG / ASJ.</span><a href="/static/arag_catalog.json" target="_blank" rel="noopener">Apri catalogo dati ↗</a></div>
               <div class="hardware-catalog-grid">
                 <label class="field-control wide"><span>Terminale / computer</span><select id="controllerCode" data-catalog-category="controller"><option value="4675204">4675204 · Delta 70T IBX</option></select></label>
@@ -165,6 +188,7 @@
                   <label class="field-control"><span>Volume target di fallback</span><div class="input-unit"><input id="targetRate" type="number" min="1" max="5000" step="5" value="250"><em>L/ha</em></div><small id="targetRateSource">Usato solo se il file non ha una dose leggibile.</small></label>
                 </div>
                 <div class="flow-formula"><span class="formula-icon">ƒx</span><span>Portata richiesta = <b>dose × velocità × larghezza / 600</b>. La dose importata non viene modificata automaticamente.</span></div>
+                <div class="profile-actions"><button type="button" id="saveProfileBtn" class="quiet-button">Salva profilo in questo browser</button><small id="profileSaveStatus">La configurazione vale per questo browser finché non la salvi.</small></div>
               </div>
               <div id="hardwareResult" class="hardware-result"><div class="result-icon">↗</div><div><strong>In attesa dei parametri</strong><small>La capacità teorica sarà calcolata in base al profilo macchina e alle dosi per zona.</small></div></div>
             </article>

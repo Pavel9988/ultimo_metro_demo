@@ -20,6 +20,8 @@ class IsoXmlDemoTests(unittest.TestCase):
         self.assertEqual(summary["counts"]["zones"], 2)
         self.assertAlmostEqual(summary["total_area_ha"], 18.6)
         self.assertAlmostEqual(summary["target_rate_l_ha"], 250.0)
+        self.assertEqual(summary["devices"][0]["name"], "Irroratrice demo")
+        self.assertIn("non prova", summary["devices"][0]["source_note"])
 
     def test_export_adds_hardware_weather_notes_and_preserves_target_values(self):
         package, filename, count = app.api_export_package({

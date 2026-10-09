@@ -77,3 +77,19 @@ Frase suggerita: *“Questo proof of concept dimostra il pre-flight e registra q
 3. Associare i codici alla scheda tecnica e alle curve di portata ugello/pressione, più i dati di calibrazione della macchina.
 4. Integrare etichette fitosanitarie nazionali e compatibilità delle miscele solo con fonti aggiornate e approvazione del tecnico.
 5. Con un contoterzista pilota registrare richieste di portata, limiti segnalati, modifiche effettuate, residuo in serbatoio e rapporto pianificato/eseguito.
+
+
+## Accesso multi-dispositivo nella rete locale
+
+Avvia `run_windows.bat` o `./run_linux.sh`. La console mostra gli indirizzi LAN rilevati. Gli altri dispositivi devono aprire `http://IP_DEL_COMPUTER_HOST:5000`, non `127.0.0.1`. Se non funziona, controlla il firewall del computer host (TCP 5000 sulla rete privata), che i dispositivi non siano su Wi-Fi guest e che il router non isoli i client.
+
+La sessione è condivisa e senza login: i file caricati e l'analisi sono comuni a tutti i visitatori. Usare solo su rete fidata; non esporre a Internet o caricare dati riservati.
+
+## Separazione tra ISOXML, hardware ed etichette
+
+Il file ISOXML è la sorgente per il campo, il task e la prescrizione. Un eventuale `DVC` è mostrato come descrizione del dispositivo ma non viene trattato come prova dei codici di attuatori/ugelli effettivamente montati. La configurazione hardware viene scelta nel pannello Setup macchina; modificandola, la mappa virtuale ricalcola la fattibilità dimostrativa per zona.
+
+La banca dati etichette usa `static/labels_catalog.json`, intenzionalmente vuoto nella demo. Aggiungere solo dati tracciabili a una fonte ufficiale, con indirizzo della fonte e data di verifica. Non inserire dati ipotetici né usare questa sezione come autorizzazione automatica al trattamento.
+
+
+Il pulsante **Salva profilo in questo browser** salva localmente la selezione hardware e i parametri macchina nel browser corrente. Il profilo non viene sincronizzato con gli altri dispositivi; su ogni computer va scelto o salvato il proprio profilo.

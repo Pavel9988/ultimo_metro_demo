@@ -26,13 +26,27 @@ chmod +x run_linux.sh
 
 Apri <http://127.0.0.1:5000>. Per fermare il server premi `Ctrl+C`.
 
+## Accesso degli amici dalla stessa rete (LAN)
+
+Il server ora ascolta su tutte le interfacce di rete del computer host. Avvia la demo **solo su una rete fidata** e leggi nel terminale l'indirizzo LAN stampato all'avvio, ad esempio `http://192.168.1.25:5000`. I tuoi amici devono aprire proprio quell'indirizzo, non `127.0.0.1` (che indica sempre il loro stesso computer).
+
+Se da un altro dispositivo non si apre:
+
+1. Sul computer host, esegui `ipconfig` su Windows oppure `ip addr` su Linux e identifica l'IPv4 della scheda Wi-Fi/Ethernet usata per la rete comune.
+2. Consenti Python/server sulla rete **privata** quando compare la finestra del firewall. Se necessario, crea una regola in ingresso TCP per la porta 5000 limitata al profilo privato.
+3. Verifica che nessuno stia usando una rete Wi-Fi guest e che il router non abbia attivo l'isolamento client/AP isolation.
+4. Controlla che il server sia ancora in esecuzione e che l'indirizzo IP non sia cambiato.
+
+**Limite importante:** questa è una demo condivisa, senza autenticazione e con stato in memoria comune. Tutti i visitatori vedono la stessa analisi e un nuovo upload può sostituire il file caricato da un altro. Non usarla su reti pubbliche, non caricare dati aziendali riservati e non esporla a Internet.
+
 ## Come provare la demo
 
 1. Premi **Prova con il file demo**: il pacchetto sintetico contiene un campo da 18,6 ha e due zone `TZN`, con target 250 e 180 L/ha letti da `PDV` e `VPN`.
-2. Nel pannello **Setup macchina** seleziona i codici dei componenti effettivamente presenti. Il catalogo include esempi di terminali, ECU, controllo PWM, flussimetri, valvole, attuatori/portaugelli selettivi, pompe, ugelli e filtri.
+2. Nel pannello **Setup macchina** seleziona i codici dei componenti effettivamente presenti. Il catalogo include esempi di terminali, ECU, controllo PWM, flussimetri, valvole, attuatori/portaugelli selettivi, pompe, ugelli e filtri. Questa selezione resta distinta dal piano ISOXML: gli eventuali DVC nel file non vengono assunti come prova dell'hardware installato.
 3. La demo usa un profilo macchina di esempio (serbatoio, larghezza, portata utile calibrata e velocità min/max). Questi dati non si deducono in modo univoco dai soli codici dei componenti. Sono nascosti in **Parametri profilo** per rappresentare dati salvati una volta per macchina, non inseriti per ogni trattamento.
 4. Con i default: 250 L/ha su 18 m a 10 km/h richiede 75 L/min. Il profilo usa 60 L/min, quindi il limite teorico è 8 km/h; la fascia da 250 L/ha diventa gialla. A 180 L/ha la velocità massima teorica è circa 11,1 km/h, per cui la fascia è verde. È una stima, non una misurazione della deposizione.
 5. Modifica vento, temperatura o tempo alla pioggia: il semaforo meteo si aggiorna con soglie illustrative, non normative. Se Internet è disponibile e il file contiene coordinate, **Meteo live** richiama Open-Meteo.
+6. La sezione **Banca dati etichette** mostra i prodotti PDT trovati nell'ISOXML e cerca un'associazione nel catalogo locale `static/labels_catalog.json`. Il catalogo incluso è volutamente vuoto: non vengono inventati dati di autorizzazione e non è ancora collegata una fonte ufficiale online.
 6. Premi **Esporta ISOXML annotato**. Il pacchetto ZIP conserva `TASKDATA.XML` e i file accessori e aggiunge annotazioni `CAN` con sintesi hardware e meteo. I valori target originali sono preservati.
 
 ### Come leggere la mappa
@@ -65,6 +79,33 @@ python -m json.tool static/arag_catalog.json
 | `static/app.js` | Logica nel browser: upload, debounce, mappa, stime, meteo e selettori | Cambiare una regola di classificazione o il comportamento dei pulsanti |
 | `app.py` | Server locale, parser XML, stato della sessione, reset, export ZIP e commenti `CAN` | Aggiungere un campo al riepilogo estratto da ISOXML |
 | `static/arag_catalog.json` | Catalogo dei codici hardware pubblici | Inserire un nuovo codice con categoria, descrizione, capacità note e URL ufficiale |
+| `static/labels_catalog.json` | Struttura del catalogo locale delle etichette | Aggiungere solo schede ottenute da fonti autorevoli, complete di fonte e data di controllo |
+
+Il file etichette parte vuoto volutamente. Un record da verificare segue questa struttura (i valori sono segnaposto, non un'etichetta reale):
+
+```json
+{
+  "iso_pdt_id": "ID_PDT_ESATTO",
+  "product_name": "Nome esatto del formulato",
+  "registration_number": "estremi da fonte ufficiale",
+  "source_name": "nome della fonte autorevole",
+  "source_url": "https://url-ufficiale.example/scheda",
+  "authorized_crops": [],
+  "authorized_uses": [],
+  "dose_max": null,
+  "dose_unit": "",
+  "max_applications": null,
+  "weather_constraints": "",
+  "buffer_zone": "",
+  "preharvest_interval": "",
+  "reentry_interval": "",
+  "verified": false,
+  "checked_at": "YYYY-MM-DD"
+}
+```
+
+Impostare `verified: true` solo dopo una verifica reale della scheda e della fonte; è richiesto anche un link HTTPS/HTTP e una data di controllo. Il profilo macchina, invece, può essere salvato dal pulsante **Salva profilo in questo browser**: resta nel browser utilizzato e non viene condiviso automaticamente con gli amici.
+
 | `examples/TASKDATA_demo.xml` | Dati XML sintetici leggibili | Cambiare nome del campo o ratei demo |
 | `examples/TASKDATA_demo.zip` | Pacchetto sintetico usato dal bottone demo | Va rigenerato se cambia l'XML d'esempio |
 | `tests/test_core.py` | Test automatici del parser/export/reset | Aggiungere un test per una nuova regola |
@@ -77,7 +118,7 @@ Consulta [RICERCA_MERCATO.md](RICERCA_MERCATO.md), con portfolio Nordson/ARAG, e
 
 ## Limiti e sicurezza
 
-- Il server ascolta solo su `127.0.0.1`: è una demo per uso locale, non esporlo direttamente a Internet.
+- Il server ascolta su `0.0.0.0` per consentire l'accesso dalla LAN. È una demo condivisa senza autenticazione: usarla solo su rete fidata e non esporla direttamente a Internet.
 - Il file è elaborato in memoria sul computer dell'utente; non viene inviato ad ARAG o a xFarm. Il pulsante **Meteo live** fa una richiesta separata a Open-Meteo con il centroide delle coordinate del campo.
 - I codici nel catalogo sono esempi basati su schede pubbliche. La loro presenza nel menu non dimostra che una combinazione sia compatibile come sistema completo. Orion 3, ad esempio, viene descritto da ARAG per sistemi di distribuzione liquidi su seminatrici: l'idoneità per una specifica irroratrice va confermata.
 - Range di un flussimetro e portata nominale di pompa/valvola non equivalgono alla portata effettiva agli ugelli: servono schema idraulico e calibrazione.

@@ -5,6 +5,7 @@ import json
 import mimetypes
 import os
 import re
+import socket
 import zipfile
 import xml.etree.ElementTree as ET
 from email import policy
@@ -236,7 +237,14 @@ def build_summary(files: dict[str, bytes], taskdata_path: str, filename: str, wa
 
     devices = []
     for node in descendants(root, "DVC"):
-        devices.append({"id": attr(node, "A"), "name": attr(node, "B") or attr(node, "A") or "Dispositivo"})
+        devices.append({
+            "id": attr(node, "A"),
+            "name": attr(node, "B") or attr(node, "A") or "Dispositivo",
+            "software_version": attr(node, "C"),
+            "serial_number": attr(node, "E"),
+            "device_elements": len(descendants(node, "DET")),
+            "source_note": "Descrizione ISOXML opzionale; non prova da sola quale hardware sia oggi montato.",
+        })
 
     area_values = [f["area_ha"] for f in fields if f.get("area_ha") is not None]
     total_area_ha = sum(area_values) if area_values else None
@@ -542,13 +550,46 @@ class DemoHandler(BaseHTTPRequestHandler):
             self.send_json(500, {"error": f"Errore interno demo: {exc}"})
 
 
+def lan_ipv4_addresses() -> list[str]:
+    """Best-effort list of local IPv4 addresses usable by other devices on the LAN."""
+    addresses: set[str] = set()
+    try:
+        for item in socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET, socket.SOCK_STREAM):
+            address = item[4][0]
+            if not address.startswith("127.") and address != "0.0.0.0":
+                addresses.add(address)
+    except OSError:
+        pass
+    # The UDP connect selects the outbound local interface without sending application data.
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as probe:
+            probe.connect(("192.0.2.1", 80))
+            address = probe.getsockname()[0]
+            if address and not address.startswith("127."):
+                addresses.add(address)
+    except OSError:
+        pass
+    return sorted(addresses)
+
+
 def run_server() -> None:
+    host = os.environ.get("ULTIMO_METRO_HOST", "0.0.0.0")
+    port = int(os.environ.get("ULTIMO_METRO_PORT", "5000"))
     print("\n================================================")
     print("             ULTIMO METRO - DEMO")
     print("================================================")
-    print("Apri nel browser: http://127.0.0.1:5000")
-    print("Server locale; non esporlo su Internet. CTRL+C per fermare.\n")
-    server = ThreadingHTTPServer(("127.0.0.1", 5000), DemoHandler)
+    print(f"Sul computer host: http://127.0.0.1:{port}")
+    addresses = lan_ipv4_addresses()
+    if addresses:
+        print("Per gli amici collegati alla stessa rete Wi-Fi/LAN:")
+        for address in addresses:
+            print(f"  http://{address}:{port}")
+    else:
+        print(f"Per la rete locale: usa l'IPv4 del computer host e la porta {port}.")
+    print("\nAccesso solo su rete fidata: la sessione e il file caricato sono condivisi tra i visitatori.")
+    print("Se non si collega: controlla firewall Windows/Linux, rete guest o isolamento client del router.")
+    print("Non esporre il server a Internet. CTRL+C per fermare.\n")
+    server = ThreadingHTTPServer((host, port), DemoHandler)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

@@ -5,6 +5,9 @@
   let weatherSource = 'manual';
   let toastTimer = null;
   let aragCatalog = { products: [], categories: {}, note: '' };
+  let labelCatalog = { products: [], source_note: 'Catalogo locale non configurato.' };
+  const MACHINE_PROFILE_KEY = 'ultimo-metro.machine-profile.v1';
+  const MACHINE_PROFILE_FIELDS = ['controllerCode','rateControlCode','ecuCode','flowmeterCode','valveCode','actuatorCode','pumpCode','nozzleCode','nozzleHolderCode','filterCode','tank','width','flow','speedMin','speedMax','targetRate'];
 
   function debounce(fn, delay = 280) {
     let timer;
@@ -74,6 +77,9 @@
     $('sourceSoftware').textContent = summary.manufacturer || 'FMIS non indicato';
     $('isoVersion').textContent = `ISOXML ${summary.version}`;
     $('packageFiles').textContent = `${summary.package_files} file${summary.was_zip ? '' : ' · XML singolo'}`;
+    $('isoDevices').textContent = summary.devices?.length
+      ? summary.devices.map(device => device.name).join(', ').slice(0, 90)
+      : 'Non indicati';
     $('gridStatus').textContent = summary.has_grid ? 'Griglia GRD presente' : (summary.counts.zones ? 'Zone TZN presenti' : 'Prescrizione da verificare');
     $('targetRateSource').textContent = summary.target_rate_l_ha != null
       ? 'Valore letto da PDV + VPN · dose massima rilevata'
@@ -82,6 +88,7 @@
       $('targetRate').value = Number(summary.target_rate_l_ha).toFixed(2).replace(/\.00$/, '');
     }
     renderZones(summary);
+    renderLabelDatabase(summary);
     renderFieldMap(summary, currentSummary ? getMachine() : null);
     renderValidationDetails(summary);
     $('exportReadyText').textContent = `Pacchetto pronto · ${summary.counts.tasks} task da annotare`;
@@ -119,6 +126,83 @@
     return (aragCatalog.products || []).find(product => product.code === code) || null;
   }
 
+  function selectedIsoProduct() {
+    const id = $('labelProductSelect')?.value;
+    return (currentSummary?.products || []).find(product => String(product.id) === String(id)) || null;
+  }
+
+  function selectedLabelRecord() {
+    const product = selectedIsoProduct();
+    if (!product) return null;
+    const normalise = (value) => String(value || '').trim().toLocaleLowerCase('it-IT').replace(/\s+/g, ' ');
+    return (labelCatalog.products || []).find(record => {
+      const catalogId = record.iso_pdt_id ?? record.product_id ?? '';
+      return (catalogId && String(catalogId) === String(product.id)) || normalise(record.product_name) === normalise(product.name);
+    }) || null;
+  }
+
+  function labelRecordIsVerified(record) {
+    return Boolean(record && record.verified === true && /^https?:\/\//i.test(String(record.source_url || '')) && record.checked_at);
+  }
+
+  function renderLabelDatabase(summary = currentSummary) {
+    const select = $('labelProductSelect');
+    if (!select) return;
+    const products = summary?.products || [];
+    const previous = select.value;
+    select.innerHTML = products.length
+      ? products.map(product => `<option value="${escapeHTML(product.id)}">${escapeHTML(product.name)} · PDT ${escapeHTML(product.id || '—')}</option>`).join('')
+      : '<option value="">Nessun prodotto PDT nel file</option>';
+    if (products.some(product => String(product.id) === String(previous))) select.value = previous;
+    else if (products.length) select.value = String(products[0].id);
+    select.disabled = !products.length;
+
+    const product = selectedIsoProduct();
+    const record = selectedLabelRecord();
+    const verified = labelRecordIsVerified(record);
+    const status = $('labelDbStatus');
+    status.textContent = verified ? 'SCHEDA VERIFICATA NEL CATALOGO' : record ? 'SCHEDA PRESENTE · DA CONFERMARE' : 'NESSUNA ETICHETTA ABBINATA';
+    status.className = `small-chip label-db-chip ${verified ? 'label-db-good' : 'label-db-warn'}`;
+
+    const crop = summary?.fields?.[0]?.crop || 'Coltura non indicata';
+    const rate = summary?.target_rate_l_ha != null ? `${formatNumber(summary.target_rate_l_ha, 2)} L/ha (massimo rilevato nel file)` : 'Dose L/ha non riconosciuta';
+    $('labelProductContext').innerHTML = product
+      ? `<span><b>Coltura ISOXML</b> ${escapeHTML(crop)}</span><span><b>Dose rilevata</b> ${escapeHTML(rate)}</span>`
+      : '<span>Importa un file con record PDT per associare un prodotto.</span>';
+
+    const recordView = $('labelRecordView');
+    if (!product) {
+      recordView.innerHTML = '<div class="label-empty-state"><strong>Nessun prodotto da controllare</strong><p>Il pacchetto ISOXML non contiene record PDT riconoscibili.</p></div>';
+    } else if (!record) {
+      recordView.innerHTML = `<div class="label-empty-state"><strong>${escapeHTML(product.name)}: scheda non trovata</strong><p>Il prodotto è stato letto dal piano, ma nel catalogo locale non esiste ancora una scheda abbinata. La demo non interroga una banca dati ufficiale in tempo reale.</p><small>Per integrare una scheda, modifica <code>static/labels_catalog.json</code> e inserisci fonte ufficiale, estremi, colture/usi, dosi e vincoli con data di verifica.</small></div>`;
+    } else {
+      const sourceLink = /^https?:\/\//i.test(String(record.source_url || ''))
+        ? `<a href="${escapeHTML(record.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(record.source_name || 'Apri fonte ufficiale')} ↗</a>`
+        : escapeHTML(record.source_name || 'Fonte non indicata');
+      const infoRows = [
+        ['Registrazione', record.registration_number || 'Non indicata'],
+        ['Colture autorizzate nel catalogo', Array.isArray(record.authorized_crops) ? record.authorized_crops.join(', ') : (record.authorized_crops || 'Non indicata')],
+        ['Impieghi', Array.isArray(record.authorized_uses) ? record.authorized_uses.join(', ') : (record.authorized_uses || 'Non indicati')],
+        ['Dose massima', record.dose_max != null ? `${record.dose_max} ${record.dose_unit || ''}`.trim() : 'Non indicata'],
+        ['Numero massimo applicazioni', record.max_applications ?? 'Non indicato'],
+        ['Vincoli operativi', record.weather_constraints || 'Non indicati'],
+        ['Fascia di rispetto', record.buffer_zone || 'Non indicata'],
+        ['Tempo di carenza / rientro', [record.preharvest_interval, record.reentry_interval].filter(Boolean).join(' / ') || 'Non indicati'],
+        ['Data controllo catalogo', record.checked_at || 'Non indicata'],
+      ];
+      recordView.innerHTML = `<div class="label-record-heading"><div><strong>${escapeHTML(record.product_name || product.name)}</strong><small>${escapeHTML(record.registration_number || 'Registrazione non indicata')}</small></div><span class="label-record-state ${verified ? 'verified' : 'unverified'}">${verified ? 'VERIFICATA NEL CATALOGO' : 'DA CONFERMARE'}</span></div><div class="label-source-line"><b>Fonte</b> ${sourceLink}</div><div class="label-record-grid">${infoRows.map(([name, value]) => `<div><span>${escapeHTML(name)}</span><strong>${escapeHTML(value)}</strong></div>`).join('')}</div><p class="label-record-note">La presenza di una scheda nel catalogo non sostituisce il controllo dell'etichetta vigente del formulato esatto.</p>`;
+    }
+
+    const checkItems = [
+      ['Fonte ufficiale e registrazione', record?.source_url && record?.registration_number ? 'Dati presenti nel catalogo locale' : 'Da collegare / verificare'],
+      ['Coltura e impiego autorizzato', record?.authorized_crops && record?.authorized_uses ? 'Dati presenti · confronto manuale necessario' : 'Da verificare'],
+      ['Dose e numero di applicazioni', record?.dose_max != null && record?.max_applications != null ? 'Dati presenti · confronto da fare' : 'Da verificare'],
+      ['Vincoli meteo, deriva e fasce', record?.weather_constraints || record?.buffer_zone ? 'Dati parziali nel catalogo' : 'Da verificare'],
+      ['Tempi di carenza e rientro', record?.preharvest_interval || record?.reentry_interval ? 'Dati parziali nel catalogo' : 'Da verificare'],
+    ];
+    $('labelCheckGrid').innerHTML = checkItems.map(([title, detail], index) => `<div class="label-check-item ${verified ? 'verified' : ''}"><span>${String(index + 1).padStart(2, '0')}</span><div><strong>${escapeHTML(title)}</strong><small>${escapeHTML(detail)}</small></div></div>`).join('');
+  }
+
   function zoneRate(zone) {
     for (const value of zone.values || []) {
       const unit = String(value.unit || '').toLowerCase().replace(/\s/g, '').replace('litri', 'l');
@@ -135,21 +219,38 @@
     const importedRate = zoneRate(zone);
     const rate = importedRate ?? machine.rate;
     if (!Number.isFinite(rate) || rate <= 0) return { level: 'warn', label: 'DOSE NON LETTA', rate: null };
+
     const maxSpeed = (600 * machine.flow) / (rate * machine.width);
-    if (importedRate == null) {
-      return { level: 'warn', label: 'DOSE FALLBACK', rate, maxSpeed, importedRate: false, meterOutOfRange: false };
+    const knownRates = [...new Set((currentSummary?.zones || []).map(zoneRate).filter(value => Number.isFinite(value)).map(value => Math.round(value * 100) / 100))];
+    const needsVariableRate = Boolean(currentSummary?.has_grid) || knownRates.length > 1;
+    const hasTaskController = machine.controller?.capabilities?.task_controller === true;
+    const hasVariableRate = machine.rateControl?.capabilities?.variable_rate === true;
+
+    // First verify that the selected control chain can deliver a spatially variable prescription.
+    // Unknown/missing capabilities are not treated as proof of compatibility.
+    if (needsVariableRate && !machine.chainCompatible) {
+      return { level: 'bad', label: 'CATENA HW INCOMPATIBILE', rate, maxSpeed, importedRate: importedRate != null, hardwareBlocked: true };
     }
+    if (needsVariableRate && (!hasTaskController || !hasVariableRate)) {
+      return { level: 'bad', label: 'RATEO NON DIMOSTRATO', rate, maxSpeed, importedRate: importedRate != null, hardwareBlocked: true };
+    }
+
     const hydraulicLevel = maxSpeed < machine.speedMin ? 'bad' : maxSpeed < machine.speedMax ? 'warn' : 'good';
-    // A selected meter can be out of its published measuring range at the requested speed/rate.
-    // This makes the zone yellow pending verification; it must not be confused with pump flow.
     const requiredAtMin = (rate * machine.speedMin * machine.width) / 600;
     const requiredAtMax = (rate * machine.speedMax * machine.width) / 600;
     const meterCaps = machine.flowmeter?.capabilities;
     const meterOutOfRange = meterCaps && Number.isFinite(Number(meterCaps.range_min_l_min)) && Number.isFinite(Number(meterCaps.range_max_l_min))
       && (requiredAtMin < Number(meterCaps.range_min_l_min) || requiredAtMax > Number(meterCaps.range_max_l_min));
-    if (hydraulicLevel === 'bad') return { level: 'bad', label: 'ROSSO', rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange };
-    if (hydraulicLevel === 'warn' || meterOutOfRange) return { level: 'warn', label: 'GIALLO', rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange };
-    return { level: 'good', label: 'VERDE', rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange: false };
+    const nozzleByNozzle = machine.rateControl?.capabilities?.nozzle_by_nozzle === true;
+    const selectiveActuator = machine.actuator?.capabilities?.selective_nozzle_control === true;
+    const actuatorVerificationNeeded = needsVariableRate && nozzleByNozzle && !selectiveActuator;
+
+    if (hydraulicLevel === 'bad') return { level: 'bad', label: 'PORTATA INSUFFICIENTE', rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange, actuatorVerificationNeeded };
+    if (hydraulicLevel === 'warn' || meterOutOfRange || actuatorVerificationNeeded || (needsVariableRate && !machine.flowmeter)) {
+      const label = actuatorVerificationNeeded ? 'ATTUAZIONE DA VERIFICARE' : meterOutOfRange ? 'RANGE SENSORE' : !machine.flowmeter && needsVariableRate ? 'SENSORE DA VERIFICARE' : 'VELOCITÀ DA RIDURRE';
+      return { level: 'warn', label, rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange, actuatorVerificationNeeded };
+    }
+    return { level: 'good', label: needsVariableRate ? 'CATENA DEMO COERENTE' : 'IDRAULICA OK', rate, maxSpeed, importedRate: importedRate != null, meterOutOfRange: false };
   }
 
   function renderFieldMap(summary, machine = null) {
@@ -214,18 +315,18 @@
       const status = statuses[index];
       const label = String(zone.name || `Zona ${index + 1}`).slice(0, 23);
       const rateText = status.rate != null ? `${formatNumber(status.rate, 1)} L/ha` : 'dose non letta';
-      svg.appendChild(make('text', { x: cx, y: 112, 'text-anchor': 'middle', fill: '#24412e', 'font-size': displayZones.length > 3 ? '8' : '10', 'font-weight': '700', 'font-family': 'Manrope, sans-serif' }, label));
-      svg.appendChild(make('text', { x: cx, y: 128, 'text-anchor': 'middle', fill: '#315d3e', 'font-size': '10', 'font-family': 'DM Mono, monospace' }, rateText));
+      svg.appendChild(make('text', { x: cx, y: 112, 'text-anchor': 'middle', fill: '#24412e', 'font-size': displayZones.length > 3 ? '9' : '11', 'font-weight': '700', 'font-family': 'Source Sans 3, sans-serif' }, label));
+      svg.appendChild(make('text', { x: cx, y: 128, 'text-anchor': 'middle', fill: '#315d3e', 'font-size': '11', 'font-family': 'Source Sans 3, sans-serif' }, rateText));
       svg.appendChild(make('rect', { x: cx - 36, y: 138, width: 72, height: 19, rx: 6, fill: status.level === 'good' ? '#e3f5df' : status.level === 'warn' ? '#fff2c6' : '#ffe1dc', stroke: status.level === 'good' ? '#68ab67' : status.level === 'warn' ? '#d6a633' : '#d66e61', 'stroke-width': '.8' }));
-      svg.appendChild(make('text', { x: cx, y: 151, 'text-anchor': 'middle', fill: status.level === 'good' ? '#28723a' : status.level === 'warn' ? '#89630e' : '#a43c32', 'font-size': '8', 'font-weight': '800', 'font-family': 'DM Mono, monospace' }, status.label));
+      svg.appendChild(make('text', { x: cx, y: 151, 'text-anchor': 'middle', fill: status.level === 'good' ? '#28723a' : status.level === 'warn' ? '#89630e' : '#a43c32', 'font-size': '9', 'font-weight': '800', 'font-family': 'Source Sans 3, sans-serif' }, status.label));
       if (status.maxSpeed != null) {
-        svg.appendChild(make('text', { x: cx, y: 170, 'text-anchor': 'middle', fill: '#315d3e', 'font-size': '8', 'font-family': 'DM Mono, monospace' }, `v max ${formatNumber(status.maxSpeed, 1)} km/h`));
+        svg.appendChild(make('text', { x: cx, y: 170, 'text-anchor': 'middle', fill: '#315d3e', 'font-size': '9', 'font-family': 'Source Sans 3, sans-serif' }, `v max ${formatNumber(status.maxSpeed, 1)} km/h`));
       }
     });
     const tag = make('g', { transform: 'translate(16 13)' });
     tag.appendChild(make('rect', { width: '156', height: '24', rx: '6', fill: '#ffffff', stroke: '#dce6de', opacity: '.97' }));
     tag.appendChild(make('circle', { cx: '12', cy: '12', r: '3.3', fill: '#42784c' }));
-    tag.appendChild(make('text', { x: '22', y: '15.5', fill: '#43634a', 'font-size': '8.5', 'font-family': 'DM Mono, monospace' }, actualBoundary ? 'CONFINE LETTO DA ISOXML' : 'GEOMETRIA SCHEMATICA'));
+    tag.appendChild(make('text', { x: '22', y: '15.5', fill: '#43634a', 'font-size': '9.5', 'font-family': 'Source Sans 3, sans-serif' }, actualBoundary ? 'CONFINE LETTO DA ISOXML' : 'GEOMETRIA SCHEMATICA'));
     svg.appendChild(tag);
 
     const hasGrid = Boolean(summary.has_grid || summary.counts?.grids);
@@ -235,7 +336,7 @@
       ? ' Il file contiene GRD, ma la demo non decodifica ancora le celle binarie: la posizione delle fasce non è la geografia reale della GRD.'
       : ' Le TZN non hanno una geometria spaziale: le fasce sono divise solo per visualizzare il confronto delle dosi.';
     const capabilityText = machine?.valid
-      ? ` I colori confrontano ogni dose con il profilo demo (${formatNumber(machine.flow, 0)} L/min, barra ${formatNumber(machine.width, 1)} m, ${formatNumber(machine.speedMin, 1)}–${formatNumber(machine.speedMax, 1)} km/h).`
+      ? ` I colori confrontano dose e portata del profilo (${formatNumber(machine.flow, 0)} L/min, barra ${formatNumber(machine.width, 1)} m, ${formatNumber(machine.speedMin, 1)}–${formatNumber(machine.speedMax, 1)} km/h) e, se ci sono dosi diverse/GRD, la presenza della catena HW per rateo variabile.`
       : ' Configura un profilo macchina per calcolare i colori.';
     $('mapNote').innerHTML = `<span>ⓘ</span> ${source}.${gridText}${capabilityText} È una stima di capacità teorica, non una misura della deposizione reale degli ugelli.`;
   }
@@ -246,6 +347,7 @@
     items.push({ level: 'good', icon: '✓', title: 'Struttura XML letta', detail: `Radice ${summary.root}; versione ${summary.version}; software: ${summary.manufacturer || 'non indicato'}.` });
     items.push({ level: summary.counts.tasks ? 'good' : 'bad', icon: summary.counts.tasks ? '✓' : '!', title: 'Task e collegamenti', detail: `${summary.counts.tasks} task e ${summary.counts.fields} campi; verifica riferimenti e contenuti mancanti prima di inviare a un terminale.` });
     items.push({ level: summary.has_recipe ? 'good' : 'warn', icon: summary.has_recipe ? '✓' : '!', title: 'Prescrizione', detail: summary.has_grid ? `${summary.counts.grids} elemento/i GRD presenti. I binari sono preservati, ma non visualizzati cella per cella.` : `${summary.counts.zones} zona/e TZN. L'eventuale geometria spaziale della dose non viene convalidata da questa demo.` });
+    items.push({ level: 'warn', icon: 'i', title: 'Descrizione macchina DVC', detail: summary.counts.devices ? `${summary.counts.devices} dispositivo/i descritti nel file (${summary.devices.map(device => device.name).join(', ')}). Sono riferimenti ISOXML, non una conferma dei codici hardware oggi montati.` : 'Nessun DVC individuato. La configurazione reale va scelta nel Setup macchina, separatamente dalla prescrizione.' });
     items.push({ level: summary.counts.products ? 'good' : 'warn', icon: summary.counts.products ? '✓' : '!', title: 'Catalogo prodotti', detail: summary.counts.products ? `${summary.counts.products} record PDT individuati. Non viene verificata l'autorizzazione fitosanitaria nazionale né la compatibilità di miscela.` : 'Nessun record PDT individuato.' });
     items.push({ level: 'warn', icon: 'i', title: 'Controllo standard / macchina', detail: 'Non viene eseguita una validazione XSD completa, né una prova su Bravo/terminali ARAG. Il formato non basta da solo a garantire la compatibilità.' });
     holder.innerHTML = items.map(item => `<div class="diagnostic-card ${item.level === 'good' ? '' : item.level}"><span class="diagnostic-icon">${item.icon}</span><div><strong>${escapeHTML(item.title)}</strong><p>${escapeHTML(item.detail)}</p></div></div>`).join('');
@@ -317,6 +419,7 @@
     const summary = currentSummary;
     renderFieldMap(summary, machine);
     renderHardwareCatalogResult(machine);
+    renderLabelDatabase(summary);
     $('weatherStatusText').textContent = weather.title;
     $('weatherStatusDetail').textContent = weather.detail;
     $('weatherTag').textContent = weather.status;
@@ -327,6 +430,9 @@
     rows.push(setCheckRow(summary.counts.tasks > 0 ? 'good' : 'bad', 'Struttura e task', `${summary.counts.tasks} task · ISOXML ${summary.version} · origine ${summary.manufacturer || 'non indicata'}`, summary.counts.tasks ? 'LETTO' : 'ERRORE'));
     rows.push(setCheckRow(summary.fields.length > 0 ? 'good' : 'warn', 'Campo e superficie', summary.fields.length ? `${summary.fields.length} campo/i; geometria ${summary.field_points?.length >= 3 ? 'presente' : 'non individuata'}.` : 'Il file non contiene PFD riconoscibili.', summary.fields.length ? 'OK' : 'ATTENZIONE'));
     rows.push(setCheckRow(summary.has_recipe ? 'good' : 'warn', 'Prescrizione', summary.has_grid ? `${summary.counts.grids} griglia/e trovate; binari non interpretati nella mappa.` : `${summary.counts.zones} zone TZN; unità/valori dipendono dai riferimenti VPN.`, summary.has_recipe ? 'RILEVATA' : 'VERIFICARE'));
+    const labelRecord = selectedLabelRecord();
+    const labelVerified = labelRecordIsVerified(labelRecord);
+    rows.push(setCheckRow(labelVerified ? 'good' : 'warn', 'Banca dati etichette', labelVerified ? `Scheda locale con fonte ${labelRecord.source_name || labelRecord.source_url} e data controllo ${labelRecord.checked_at}. Verifica che sia il formulato esatto e la versione vigente.` : summary.products?.length ? 'Nessuna scheda etichetta marcata come verificata per il prodotto selezionato; non è stata interrogata una banca dati ufficiale.' : 'Nel file non risultano prodotti PDT da confrontare.', labelVerified ? 'SCHEDA' : 'DA VERIFICARE'));
     rows.push(setCheckRow(machine.valid ? machine.level : 'bad', 'Compatibilità idraulica', machine.valid ? machine.detail : 'Controlla il profilo macchina nei parametri avanzati.', machine.valid ? ({ good: 'OK', warn: 'LIMITE', bad: 'NON FATTIBILE' }[machine.level]) : 'DATI'));
     const meterCheckLevel = !machine.valid || !machine.flowmeter || machine.meterRangeWarning ? 'warn' : 'good';
     const meterCheckDetail = !machine.flowmeter
@@ -347,7 +453,7 @@
     let overallDetail = 'Il file è stato letto e i parametri inseriti risultano compatibili con le soglie della demo.';
     if (!machine.valid || machine.level === 'bad' || weather.level === 'bad' || summary.counts.tasks === 0) {
       overallLevel = 'bad'; overallTitle = 'Revisione necessaria prima del trattamento'; overallDetail = 'C’è almeno una condizione critica. Correggi i parametri o rivaluta la finestra operativa con il tecnico.';
-    } else if (machine.level === 'warn' || weather.level === 'warn' || !summary.has_recipe || !summary.fields.length || !machine.chainCompatible || !machine.rateControl?.capabilities?.variable_rate || machine.meterRangeWarning || !machine.flowmeter || (machine.ecu?.code === '4679900' && machine.rateControl?.capabilities?.pwm)) {
+    } else if (machine.level === 'warn' || weather.level === 'warn' || !summary.has_recipe || !summary.fields.length || !machine.chainCompatible || !machine.rateControl?.capabilities?.variable_rate || machine.meterRangeWarning || !machine.flowmeter || !labelVerified || (machine.ecu?.code === '4679900' && machine.rateControl?.capabilities?.pwm)) {
       overallLevel = 'warn'; overallTitle = 'Controlli da completare'; overallDetail = 'La lettura è riuscita, ma almeno un vincolo richiede una verifica manuale.';
     }
     const overall = $('overallStatus');
@@ -551,11 +657,13 @@
     $('resetBtn').addEventListener('click', () => { $('fileInput').value = ''; $('fileInput').click(); });
     $('clearBtn').addEventListener('click', clearAnalysis);
     $('toggleAdvancedBtn').addEventListener('click', toggleAdvancedSettings);
+    $('saveProfileBtn')?.addEventListener('click', saveMachineProfile);
     ['controllerCode','rateControlCode','ecuCode','flowmeterCode','valveCode','actuatorCode','pumpCode','nozzleCode','nozzleHolderCode','filterCode'].forEach(id => {
       $(id).addEventListener('change', () => { updatePreflight(); showToast('Configurazione hardware aggiornata dal catalogo.'); });
     });
     $('exportBtn').addEventListener('click', exportPackage);
     $('loadWeatherBtn').addEventListener('click', loadLiveWeather);
+    $('labelProductSelect')?.addEventListener('change', () => { renderLabelDatabase(currentSummary); updatePreflight(); });
     ['wind', 'temperature', 'rainHours', 'tank', 'width', 'flow', 'speedMin', 'speedMax', 'targetRate'].forEach(id => {
       $(id).addEventListener('input', schedulePreflight);
       $(id).addEventListener('change', schedulePreflight);
@@ -605,17 +713,70 @@
     });
   }
 
+  function saveMachineProfile() {
+    const profile = {};
+    MACHINE_PROFILE_FIELDS.forEach(id => {
+      const control = $(id);
+      if (control) profile[id] = control.value;
+    });
+    try {
+      localStorage.setItem(MACHINE_PROFILE_KEY, JSON.stringify(profile));
+      $('profileSaveStatus').textContent = `Profilo salvato in questo browser (${new Date().toLocaleString('it-IT')}).`;
+      showToast('Profilo irroratrice salvato in questo browser.');
+    } catch (error) {
+      $('profileSaveStatus').textContent = 'Salvataggio non disponibile: controlla le impostazioni di privacy del browser.';
+      showToast('Non riesco a salvare il profilo nel browser.');
+    }
+  }
+
+  function restoreMachineProfile() {
+    try {
+      const raw = localStorage.getItem(MACHINE_PROFILE_KEY);
+      if (!raw) return;
+      const profile = JSON.parse(raw);
+      if (!profile || typeof profile !== 'object') return;
+      MACHINE_PROFILE_FIELDS.forEach(id => {
+        const control = $(id);
+        if (!control || profile[id] == null) return;
+        const value = String(profile[id]);
+        if (control.tagName === 'SELECT' && !Array.from(control.options).some(option => option.value === value)) return;
+        control.value = value;
+      });
+      $('profileSaveStatus').textContent = 'Profilo precedente ripristinato da questo browser. Salva di nuovo dopo le modifiche.';
+    } catch (error) {
+      $('profileSaveStatus').textContent = 'Profilo precedente non leggibile; usa i valori correnti e salvali di nuovo.';
+    }
+  }
+
   async function initCatalog() {
     try {
       const response = await fetch('/static/arag_catalog.json', { cache: 'no-store' });
       if (!response.ok) throw new Error('Catalogo locale non disponibile');
       aragCatalog = await response.json();
       populateHardwareCatalog();
+      restoreMachineProfile();
       const note = document.querySelector('.catalog-status span:nth-child(2)');
       if (note && aragCatalog.catalogue_version) note.textContent = `${aragCatalog.catalogue_version} · dati pubblici iniziali, compatibilità da confermare.`;
       updatePreflight();
     } catch (error) {
       showToast('Catalogo ARAG locale non caricato: controlla che il file static/arag_catalog.json sia presente.');
+    }
+  }
+
+  async function initLabelCatalog() {
+    try {
+      const response = await fetch('/static/labels_catalog.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error('Catalogo etichette locale non disponibile');
+      labelCatalog = await response.json();
+      const status = $('labelDbStatus');
+      if (status && !labelCatalog.products?.length) status.textContent = 'CATALOGO VUOTO';
+      if (currentSummary) {
+        renderLabelDatabase(currentSummary);
+        updatePreflight();
+      }
+    } catch (error) {
+      labelCatalog = { products: [], source_note: 'Catalogo locale non disponibile.' };
+      if ($('labelDbStatus')) $('labelDbStatus').textContent = 'CATALOGO NON DISPONIBILE';
     }
   }
 
@@ -635,6 +796,7 @@
       $('fieldArea').textContent = '—';
       $('fieldCropChip').textContent = 'Coltura non indicata';
       $('zoneList').innerHTML = '<div class="empty-state">Analisi rimossa. Carica un altro ISOXML o seleziona “Prova con il file demo”.</div>';
+      renderLabelDatabase(null);
       $('validationDetails').innerHTML = '';
       $('hardwareCatalogResult').innerHTML = '<strong>Configurazione hardware mantenuta</strong><p>Il profilo macchina resta disponibile per il prossimo file. L’analisi ISOXML precedente è stata cancellata dalla sessione.</p>';
       $('overallStatus').className = 'overall-status neutral';
@@ -657,4 +819,5 @@
 
   attachEvents();
   initCatalog();
+  initLabelCatalog();
 })();
